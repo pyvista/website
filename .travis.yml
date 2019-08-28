@@ -1,12 +1,11 @@
-sudo: required
+sudo: false
 
 dist: xenial
 
-os:
-  - linux
+os: linux
 
 language: python
-python: 3.7
+python: 3.6
 
 
 env:
@@ -20,11 +19,7 @@ install:
 
 
 script:
-  - set -e
   - make html
-  - set +x
-  - git config --global user.name "${GH_NAME}";
-  - git config --global user.email "${GH_EMAIL}";
 
 
 # Deploy the built HTML to Github pages
