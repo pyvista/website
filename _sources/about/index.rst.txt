@@ -22,19 +22,9 @@ Creators
 --------
 
 We are an open source community - `our developers <https://github.com/pyvista/pyvista/blob/master/AUTHORS.rst>`__
-come from a wide breadth of backgrounds ranging from computation geophysics to
-aeronautical engineering. Our diverse team of developers is what makes PyVista
-successful and able to be used across disciplines.
-
-Maintainers
-~~~~~~~~~~~
-
-
-Bane Sullivan
-
-
-
-Alex Kaszynski
+come from a wide breadth of backgrounds ranging from computational geophysics
+to aeronautical engineering. Our diverse team of developers is what makes
+PyVista successful and able to be used across disciplines.
 
 
 
@@ -42,17 +32,11 @@ Alex Kaszynski
 The PyVista Ecosystem
 ---------------------
 
-Many projects make up the PyVista ecosystem - the following are a list of
-projects the PyVista developers support:
+PyVista is an ecosystem with many interrelated projects and repositories.
+The following are a list of projects the PyVista developers support:
 
 
 .. raw:: html
-
-
-    <h2 id="projects">PyVista Ecosystem</h2>
-    <p>
-        PyVista is an ecosystem with many interrelated projects and repositories.
-    </p>
 
     <div class="columns">
         <div class="column">
