@@ -29,9 +29,12 @@ successful and able to be used across disciplines.
 Maintainers
 ~~~~~~~~~~~
 
-Bane
 
-Alex
+Bane Sullivan
+
+
+
+Alex Kaszynski
 
 
 
@@ -48,7 +51,7 @@ projects the PyVista developers support:
 
     <h2 id="projects">PyVista Ecosystem</h2>
     <p>
-        SimPEG is an ecosystem with many interrelated projects and repositories.
+        PyVista is an ecosystem with many interrelated projects and repositories.
     </p>
 
     <div class="columns">

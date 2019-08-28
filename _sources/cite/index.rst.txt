@@ -1,3 +1,4 @@
+.. _citing:
 .. title:: Citing PyVista
 
 Citing PyVista
