@@ -1,0 +1,25 @@
+sudo: required
+
+dist: xenial
+
+os:
+  - linux
+
+language: python
+python: 3.7
+
+
+env:
+  global:
+    # Doctr deploy key for pyvista/website
+    - secure: "P++/FdB/dM1lmuuSgxiOe+8PyS8XpkbM7oJiaQn00+7i+B3FDuplvzFLmLmKEDGvOchHfkDk+9qkFOQSGE+ZyGK46XUhvTmk7nre/bHhWf9NcdFHuRSV8LG1ptb5vMJ60i4dGGMPth6FBafKgY6qX8UExoHxEhoYGKvZqJZPvf9od/dwyuoub0U8hhN3G7zL+GbwvDaBILH15lDw58iYSP21VPwXrPxkrE0N9Djz3lPqir9R61QKmagMVp+YHil/7Y7jnShflzhcSwJXMRq22TB2d+RsnUfS+bpoGRkwfO6XppJ98X1fg7vDu0N+XMFby2pOmJ59yqx2nmauWFXBm4RbqD9dkqPjNOpLIiF42xVGsa0rNHw2qBIih4BFuSlzsO5aoTMqeoPfHaTDNAJ/bUSsQZcHHyYEVy8WOV90E6S2L6F+ySJLSevIlBb2sa+tQ3LxTcVMg5Pg7kY0cA21P4p29OskUMq4i6vOLEWgnROsaMr8hnM8OJFhOenRIhbk4i9gN6BqiDpYjUA3iM6hydctQQQpiEZM1xSNfH1e+HkRATNy5dRGj63ldWKzq1poZBqRrSgk8qGP7EgdwjL/OK8BAxiEnyFsKfaaRe1Rhxava/dUXz0q+AiBZexnFlsmFzPTnrT+rg4PXk2bcJiy3BsjCy51oNh6a4c+pYn4naU="
+
+
+install:
+  - pip install -r requirements.txt
+
+
+script:
+  - set -e
+  - make html
+  - doctr deploy --built-docs ./_build/html/ .
