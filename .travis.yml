@@ -12,7 +12,7 @@ python: 3.7
 env:
   global:
     # Doctr deploy key for pyvista/website
-    - secure: "P++/FdB/dM1lmuuSgxiOe+8PyS8XpkbM7oJiaQn00+7i+B3FDuplvzFLmLmKEDGvOchHfkDk+9qkFOQSGE+ZyGK46XUhvTmk7nre/bHhWf9NcdFHuRSV8LG1ptb5vMJ60i4dGGMPth6FBafKgY6qX8UExoHxEhoYGKvZqJZPvf9od/dwyuoub0U8hhN3G7zL+GbwvDaBILH15lDw58iYSP21VPwXrPxkrE0N9Djz3lPqir9R61QKmagMVp+YHil/7Y7jnShflzhcSwJXMRq22TB2d+RsnUfS+bpoGRkwfO6XppJ98X1fg7vDu0N+XMFby2pOmJ59yqx2nmauWFXBm4RbqD9dkqPjNOpLIiF42xVGsa0rNHw2qBIih4BFuSlzsO5aoTMqeoPfHaTDNAJ/bUSsQZcHHyYEVy8WOV90E6S2L6F+ySJLSevIlBb2sa+tQ3LxTcVMg5Pg7kY0cA21P4p29OskUMq4i6vOLEWgnROsaMr8hnM8OJFhOenRIhbk4i9gN6BqiDpYjUA3iM6hydctQQQpiEZM1xSNfH1e+HkRATNy5dRGj63ldWKzq1poZBqRrSgk8qGP7EgdwjL/OK8BAxiEnyFsKfaaRe1Rhxava/dUXz0q+AiBZexnFlsmFzPTnrT+rg4PXk2bcJiy3BsjCy51oNh6a4c+pYn4naU="
+    - secure: "Jp/dgnu9B/9X0PdJ2fl0d4VCOPVjU+wdAxJJQEqoqo21xkb7QqCD3sQRJju/8WclC9j++VvFIagit9leJF3Xtmxu1LuDSwMC0EZb0kfG/eNEugpehpZNk+e0V+kr/Iq/KlmoXlf/JxXTW4pFuxA6f7iU+FvqFv3OfKsUQHFYjrlcno4pZKlCgCdW9crqx8ptmTbPznFSDgoyN/T+KXgl3V0DVuLej2PBLVQceacN9BkMQoSKIW4NuoJrNwvm1fXCJXLRHF+M5xJWEH48O8XrCrVk7ucCVgMXWBIcjCtxBjxqsSjmPyjpV2zOIPzT0X/lSvNezG+yp6eafmy40NiFuQMoYtbhcE/bllMYoFc3ax6zFJ8vJocj0kJARn9wmxICfaktod6xcwHfbCoyWigeeIlA5af5qPug/Xti2haixEWMqgdeqTqqXWUeUwNlSvke0sDMtUZaCTxSKQ7/06IKFg55O1WLTd8pKQ8i/s3N2Dhd40Y2kUbX1prQWmQ9mXdEtnrX5ShgDdg4GzDhD6EO0ofXU9CVlYHI0ERQ41bX920GZ2uHO3gXXbLug+yCbIjB/XbeVM9JteH8wbkscK8BtvzRjK9jngvmC5L9Z5kXEqwgxobYryDQ5zWjYI3Uv5riifGXqpWGAOr85BbSVhtIRfN2ONgJvnTCXfTFMsEXgRA="
 
 
 install:
@@ -23,3 +23,7 @@ script:
   - set -e
   - make html
   - doctr deploy --built-docs ./_build/html/ .
+
+
+notifications:
+  email: false
