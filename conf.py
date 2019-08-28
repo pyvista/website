@@ -109,7 +109,7 @@ html_context = {
         (
             '<i class="fab fa-slack fa-lg"></i>',
             "Slack chat",
-            "https://slack.pyvista.org",
+            "http://slack.pyvista.org",
         ),
     ],
     "url": "https://www.pyvista.org",
