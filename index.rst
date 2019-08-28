@@ -24,12 +24,12 @@
 
             <h2>A Domain Agnostic Visualization and Analysis Toolkit</h2>
 
-            PyVista is used across Earth sciences and engineering disciplines. A diverse community
-	    use PyVista to visualize data/models in 3D, generate publication-quality illustrations, automate analysis workflows, and build custom applications leveraging PyVista's 3D capabilities.
+            <p>PyVista is used across Earth sciences and engineering disciplines. A diverse community
+	    use PyVista to visualize data/models in 3D, generate publication-quality illustrations, automate analysis workflows, and build custom applications leveraging PyVista's 3D capabilities.</p>
 
-        New to programming? Welcome! Many of PyVista's users are novice programmers
-        and we've designed PyVista to be intuitive and ready for beginner to start
-        making compelling visualizations of spatial data.
+        <p>New to programming? Welcome! Many of PyVista's users are novice programmers
+        and we've designed PyVista to be intuitive and ready for beginners to get started
+        making compelling visualizations of spatial data.</p>
 
             </div>
             <div class="col-sm-5">
