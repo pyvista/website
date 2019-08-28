@@ -53,7 +53,7 @@ html_title = project
 html_short_title = ""
 # html_logo = "_static/gmt-logo.png"
 # html_favicon = "_static/favicon.png"
-html_extra_path = [".nojekyll", "CNAME", "team.html"]
+html_extra_path = [".nojekyll", "team.html"] #TODO: "CNAME",
 html_use_smartypants = True
 pygments_style = "default"
 html_add_permalinks = ""
@@ -66,7 +66,7 @@ html_theme_options = {
     "navbar_title": "",
     "navbar_site_name": "Site",
     "navbar_links": [
-        ("Home", "/", True),
+        ("Home", ".", True),
         ("About", "about/", True),
         # ("Download", "download/", True),
         ("Documentation", "documentation/", True),
