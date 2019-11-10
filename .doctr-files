@@ -1,4 +1,3 @@
-./_sources/about/index.rst.txt
 ./_sources/cite/index.rst.txt
 ./_sources/documentation/index.rst.txt
 ./_sources/index.rst.txt
@@ -67,10 +66,15 @@
 ./_static/bootswatch-3.3.7/united/bootstrap.min.css
 ./_static/bootswatch-3.3.7/yeti/bootstrap.min.css
 ./_static/demo/geotechnical-models.png
+./_static/demo/line-widget-streamlines.gif
+./_static/demo/omfvista.gif
 ./_static/demo/opacity-by-array.png
 ./_static/demo/point-cloud.png
 ./_static/demo/salt-dome.gif
+./_static/demo/slider-widget-threshold.gif
+./_static/demo/sphere-widget-c.gif
 ./_static/demo/streamlines.png
+./_static/demo/tornado.jpeg
 ./_static/demo/tunneling.png
 ./_static/demo/visible-cell-selection.gif
 ./_static/demo/volume-opacity.png
@@ -109,7 +113,6 @@
 ./_static/style.css
 ./_static/underscore-1.3.1.js
 ./_static/underscore.js
-./about/index.html
 ./cite/index.html
 ./documentation/index.html
 ./genindex.html
