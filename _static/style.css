@@ -134,6 +134,18 @@ blockquote {
     background-image: none;
 }
 
+.carousel-indicators li {
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: #A9A9A9;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.carousel-indicators .active {
+    background-color: #ffff99;
+}
+
 @media (min-width:1200px) {
     .container {
         width:970px;

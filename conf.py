@@ -67,7 +67,6 @@ html_theme_options = {
     "navbar_site_name": "Site",
     "navbar_links": [
         ("Home", ".", True),
-        ("About", "about/", True),
         # ("Download", "download/", True),
         ("Documentation", "documentation/", True),
         # ("Workshops", "workshops/", True),
