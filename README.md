@@ -13,5 +13,5 @@ place for those unfamiliar with the project to learn what it is all about!
 At the top level of the repository, run:
 
 ```
-make
+make html
 ```
