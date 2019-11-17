@@ -57,47 +57,47 @@
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/volume-opacity.png">
+                     <img src="_static/demo/volume-opacity.png" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/tornado.jpeg">
+                     <img src="_static/demo/tornado.jpeg" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/omfvista.gif">
+                     <img src="_static/demo/omfvista.gif" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/sphere-widget-c.gif">
+                     <img src="_static/demo/sphere-widget-c.gif" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/point-cloud.png">
+                     <img src="_static/demo/point-cloud.png" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/visible-cell-selection.gif">
+                     <img src="_static/demo/visible-cell-selection.gif" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/slider-widget-threshold.gif">
+                     <img src="_static/demo/slider-widget-threshold.gif" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/tunneling.png">
+                     <img src="_static/demo/tunneling.png" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
                    <div class="item">
-                     <img src="_static/demo/volume-rendering.gif">
+                     <img src="_static/demo/volume-rendering.gif" height="75%">
                      <div class="carousel-caption">
                      </div>
                    </div>
@@ -173,5 +173,5 @@
 .. toctree::
    :hidden:
 
-   documentation/index.rst
+   projects/index.rst
    cite/index.rst

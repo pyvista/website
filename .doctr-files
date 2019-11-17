@@ -1,6 +1,6 @@
 ./_sources/cite/index.rst.txt
-./_sources/documentation/index.rst.txt
 ./_sources/index.rst.txt
+./_sources/projects/index.rst.txt
 ./_static/basic.css
 ./_static/bootstrap-2.3.2/css/bootstrap-responsive.css
 ./_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css
@@ -114,10 +114,10 @@
 ./_static/underscore-1.3.1.js
 ./_static/underscore.js
 ./cite/index.html
-./documentation/index.html
 ./genindex.html
 ./index.html
 ./objects.inv
+./projects/index.html
 ./search.html
 ./searchindex.js
 ./team.html
