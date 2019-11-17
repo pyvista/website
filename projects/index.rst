@@ -1,7 +1,7 @@
-.. title:: Documentation
+.. title:: Projects
 
-Documentation
-=============
+Projects
+========
 
 PyVista is an ecosystem with many interrelated projects and repositories.
 The following are a list of projects the PyVista developers support:

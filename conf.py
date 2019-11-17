@@ -66,11 +66,11 @@ html_theme_options = {
     "navbar_title": "",
     "navbar_site_name": "Site",
     "navbar_links": [
-        ("Home", ".", True),
+        ("Home", "index"),
         # ("Download", "download/", True),
-        ("Documentation", "documentation/", True),
+        ("Projects", "projects/index"),
         # ("Workshops", "workshops/", True),
-        ("Citing", "cite/", True),
+        ("Citing", "cite/index"),
     ],
     # Render the next and previous page links in navbar. (Default: true)
     "navbar_sidebarrel": False,
@@ -109,6 +109,11 @@ html_context = {
             '<i class="fab fa-slack fa-lg"></i>',
             "Slack chat",
             "http://slack.pyvista.org",
+        ),
+        (
+            '<i class="fas fa-envelope"></i>',
+            "Email",
+            "mailto:info@pyvista.org",
         ),
     ],
     "url": "https://www.pyvista.org",

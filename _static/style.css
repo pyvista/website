@@ -200,3 +200,15 @@ blockquote {
     padding-right: 12px;
     padding-left: 12px;
 }
+
+
+/*********************************************************************************/
+
+.icons {
+    margin-top: 20px;
+    margin-left: 1.5em !important;
+}
+
+.icons > li {
+    margin-bottom: 10px;
+}
