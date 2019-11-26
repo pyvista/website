@@ -12,10 +12,33 @@
     </div>
 
     <div class="container-fluid front-block front-block-dark front-updates">
-         <div class="row" style="text-align:center">
-         Our goal is to make 3D visualization and analysis approachable to domain-scientists so they
-         can focus on the research questions at hand.
-         </div>
+        <div class="row" style="text-align:center">
+            <h2><i>Our goal is to make 3D visualization and analysis approachable to domain-scientists so they
+            can focus on the research questions at hand.</i></h2>
+            <br>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-sm-4">
+            <h2><i class="fas fa-box-open fa-2x"></i></h2>
+            <b>Open-Source</b>
+            <br>
+            Entirely open-source with the permissive <a href="https://github.com/pyvista/pyvista/blob/master/LICENSE">MIT License</a>
+          </div>
+          <div class="col-sm-4">
+            <h2><i class="fab fa-python fa-2x"></i></h2>
+            <b>Python</b>
+            <br>
+            Streamlined, easy to use Python interface
+          </div>
+          <div class="col-sm-4">
+            <h2><i class="fas fa-cubes fa-2x"></i></h2>
+            <b>3D Data Structures</b>
+            <br>
+            3D finite element/volume data structures at the core
+          </div>
+
+        </div>
     </div>
 
    <div class="container-fluid front-block front-block-light">
@@ -147,7 +170,7 @@
             directly inheriting VTK mesh types and wrapping a layer of functionality on
             top of those types to make creation and analysis of those data structures
             simple and intuitive. This all means that PyVista is immediately interoperable
-            with *any* VTK-based software - which is a part of our mission to break down
+            with <i>any</i> VTK-based software - which is a part of our mission to break down
             the barrier to entry for 3D visualization across the sciences.
 
 
