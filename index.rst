@@ -20,19 +20,19 @@
 
         <div class="row text-center">
           <div class="col-sm-4">
-            <h2><i class="fas fa-box-open fa-2x"></i></h2>
+            <a href="https://github.com/pyvista/pyvista/blob/master/LICENSE"><h2><i class="fas fa-box-open fa-2x"></i></h2></a>
             <b>Open-Source</b>
             <br>
             Entirely open-source with the permissive <a href="https://github.com/pyvista/pyvista/blob/master/LICENSE">MIT License</a>
           </div>
           <div class="col-sm-4">
-            <h2><i class="fab fa-python fa-2x"></i></h2>
+            <a href="https://pypi.org/project/pyvista/"><h2><i class="fab fa-python fa-2x"></i></h2></a>
             <b>Python</b>
             <br>
-            Streamlined, easy to use Python interface
+            Streamlined, easy to use Python interface available on <a href="https://pypi.org/project/pyvista/">PyPI</a>
           </div>
           <div class="col-sm-4">
-            <h2><i class="fas fa-cubes fa-2x"></i></h2>
+            <a href="https://docs.pyvista.org/getting-started/what-is-a-mesh.html"><h2><i class="fas fa-cubes fa-2x"></i></h2></a>
             <b>3D Data Structures</b>
             <br>
             3D finite element/volume data structures at the core
@@ -145,6 +145,7 @@
 
    <div class="container-fluid front-block front-block-dark">
         <div class="row">
+            <div class="col-sm-10 front-block-text">
 
             <h2>About</h2>
 
@@ -173,21 +174,30 @@
             with <i>any</i> VTK-based software - which is a part of our mission to break down
             the barrier to entry for 3D visualization across the sciences.
 
-
+            </div>
         </div>
    </div>
 
 
    <div class="container-fluid front-block front-block-light">
         <div class="row">
+            <div class="col-sm-4">
+                <br>
+                <br>
+                <center><a href="http://slack.pyvista.org"><h2><i class="fab fa-slack fa-5x"></i></h2></a></center>
+            </div>
+            <div class="col-sm-7 front-block-text">
 
-        <h2>Creators</h2>
+            <h2>Community</h2>
 
-        We are an open source community - <a href="https://github.com/pyvista/pyvista/blob/master/AUTHORS.rst">our developers</a>
-        come from a wide breadth of backgrounds ranging from computational geophysics
-        to aeronautical engineering. Our diverse team of developers is what makes
-        PyVista successful and able to be used across disciplines.
-
+            We are an open source community - <a href="https://github.com/pyvista/pyvista/blob/master/AUTHORS.rst">our developers</a>
+            come from a wide breadth of backgrounds ranging from computational geophysics
+            to aeronautical engineering. Our diverse team of developers is what makes
+            PyVista successful and able to be used across disciplines.
+            <br>
+            <br>
+            Join the community of users, developers, and followers on <a href="http://slack.pyvista.org">Slack</a>
+            </div>
         </div>
    </div>
 
