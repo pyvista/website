@@ -25,7 +25,7 @@ The following are a list of projects the PyVista developers support:
             <ul class="icons">
                 <li><i class="fab fa-github fa-lg"></i><a href="https://github.com/pyvista/pymeshfix">pyvista/pymeshfix</a></li>
                 <li><i class="fas fa-book fa-lg"></i><a href="http://pymeshfix.pyvista.org">http://pymeshfix.pyvista.org</a></li>
-                <li><i class="fa fa-sync-alt fa-lg" style="color:green"></i>Ready, but changing</li>
+                <li><i class="fa fa-check fa-lg" style="color:green"></i>Stable</li>
             </ul>
         </div>
     </div>
@@ -45,7 +45,7 @@ The following are a list of projects the PyVista developers support:
             <ul class="icons">
                 <li><i class="fab fa-github fa-lg"></i><a href="https://github.com/pyvista/pyacvd">pyvista/pyacvd</a></li>
                 <li><i class="fas fa-book fa-lg"></i></i>No documentation yet!</li></li>
-                <li><i class="fa fa-sync-alt fa-lg" style="color:orange"></i>In the works...</li>
+                <li><i class="fa fa-check fa-lg" style="color:green"></i>Stable</li>
             </ul>
         </div>
     </div>
