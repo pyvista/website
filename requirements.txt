@@ -1,5 +1,5 @@
 Sphinx
 sphinx-autobuild
-sphinxcontrib-websupport
 sphinx-notfound-page>=0.3.0
 sphinx_bootstrap_theme
+sphinxcontrib-websupport
