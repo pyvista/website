@@ -2,11 +2,12 @@
 
 .. raw:: html
 
-    <div class="container">
-        <img class="front-logo" src="_static/pyvista-banner.png">
+    <div class="container-fluid">
+      <h1 class="front-header" style="margin: 0;">The PyVista Project</h1>
+      <img class="front-logo" src="_static/pyvista_banner.png" style="width: 100%;">
     </div>
 
-    <div class="container-fluid front-block front-block-dark front-updates">
+    <div class="container-fluid front-block front-block-light front-updates">
         <div class="row" style="text-align:center">
             <h2><i>Our goal is to make 3D visualization and analysis approachable to domain-scientists so they
             can focus on the research questions at hand.</i></h2>
@@ -36,7 +37,7 @@
         </div>
     </div>
 
-   <div class="container-fluid front-block front-block-light">
+   <div class="container-fluid front-block front-block-dark">
         <div class="row">
             <div class="col-sm-7 front-block-text">
 
@@ -138,6 +139,20 @@
         </div>
    </div>
 
+   <div class="container-fluid front-block front-block-light">
+        <div class="row">
+            <div class="col-sm-10 front-block-text">
+
+            <h2>Professional Services</h2>
+
+            <i>Need help getting the most out of PyVista? Want to sponsor development of new capabilities?</i>
+            <br/>
+            Reach out to <a href="mailto:support@pyvista.org">support@pyvista.org</a> and we can help connect you with the right community experts to tackle your challenges.
+
+            </div>
+        </div>
+   </div>
+
    <div class="container-fluid front-block front-block-dark">
         <div class="row">
             <div class="col-sm-10 front-block-text">
@@ -162,7 +177,7 @@
             everyday!
             <br/>
             <br/>
-            PyVista is built on top of the <a href="http://wwww.vtk.org">Visualization Toolkit (VTK)</a>
+            PyVista is built on top of the <a href="https://wwww.vtk.org">Visualization Toolkit (VTK)</a>
             directly inheriting VTK mesh types and wrapping a layer of functionality on
             top of those types to make creation and analysis of those data structures
             simple and intuitive. This all means that PyVista is immediately interoperable
@@ -179,7 +194,7 @@
             <div class="col-sm-4">
                 <br>
                 <br>
-                <center><a href="http://slack.pyvista.org"><h2><i class="fab fa-slack fa-5x"></i></h2></a></center>
+                <center><a href="https://slack.pyvista.org"><h2><i class="fab fa-slack fa-5x"></i></h2></a></center>
             </div>
             <div class="col-sm-7 front-block-text">
 
@@ -191,7 +206,7 @@
             PyVista successful and able to be used across disciplines.
             <br>
             <br>
-            Join the community of users, developers, and followers on <a href="http://slack.pyvista.org">Slack</a>
+            Join the community of users, developers, and followers on <a href="https://slack.pyvista.org">Slack</a>
             </div>
         </div>
    </div>

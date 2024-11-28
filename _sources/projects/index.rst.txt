@@ -15,7 +15,7 @@ The following are a list of projects the PyVista developers support:
             <p>3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)</p>
             <ul class="icons">
                 <li><i class="fab fa-github fa-lg"></i><a href="https://github.com/pyvista/pyvista">pyvista/pyvista</a></li>
-                <li><i class="fas fa-book fa-lg"></i><a href="http://docs.pyvista.org">http://docs.pyvista.org</a></li>
+                <li><i class="fas fa-book fa-lg"></i><a href="https://docs.pyvista.org">https://docs.pyvista.org</a></li>
                 <li><i class="fa fa-check fa-lg" style="color:green"></i>Stable</li>
             </ul>
         </div>
@@ -24,7 +24,7 @@ The following are a list of projects the PyVista developers support:
             <p>Python Wrapper for MeshFix: easily repair holes in PyVista surface meshes</p>
             <ul class="icons">
                 <li><i class="fab fa-github fa-lg"></i><a href="https://github.com/pyvista/pymeshfix">pyvista/pymeshfix</a></li>
-                <li><i class="fas fa-book fa-lg"></i><a href="http://pymeshfix.pyvista.org">http://pymeshfix.pyvista.org</a></li>
+                <li><i class="fas fa-book fa-lg"></i><a href="https://pymeshfix.pyvista.org">https://pymeshfix.pyvista.org</a></li>
                 <li><i class="fa fa-check fa-lg" style="color:green"></i>Stable</li>
             </ul>
         </div>
@@ -35,7 +35,7 @@ The following are a list of projects the PyVista developers support:
             <p>A Python interface to the C++ TetGen library to generate tetrahedral meshes of any 3D polyhedral domains</p>
             <ul class="icons">
                 <li><i class="fab fa-github fa-lg"></i><a href="https://github.com/pyvista/tetgen">pyvista/tetgen</a></li>
-                <li><i class="fas fa-book fa-lg"></i><a href="http://tetgen.pyvista.org/">https://tetgen.pyvista.org</a></li>
+                <li><i class="fas fa-book fa-lg"></i><a href="https://tetgen.pyvista.org/">https://tetgen.pyvista.org</a></li>
                 <li><i class="fa fa-check fa-lg" style="color:green"></i>Stable</li>
             </ul>
         </div>
