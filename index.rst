@@ -147,7 +147,8 @@
 
             <i>Need help getting the most out of PyVista? Want to sponsor development of new capabilities?</i>
             <br/>
-            Reach out to <a href="mailto:support@pyvista.org">support@pyvista.org</a> and we can help connect you with the right community experts to tackle your challenges.
+            <br/>
+            Please reach out to <a href="mailto:support@pyvista.org">support@pyvista.org</a> and we can connect you with the right community experts, who can help you confidently and efficiently use PyVista and/or tailor your custom software to leverage PyVista's robust 3D visualization capabilities.
 
             </div>
         </div>
