@@ -2,12 +2,12 @@
 
 .. raw:: html
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-top: 0;">
       <h1 class="front-header" style="margin: 0;">The PyVista Project</h1>
       <img class="front-logo" src="_static/pyvista_banner.png" style="width: 100%;">
     </div>
 
-    <div class="container-fluid front-block front-block-light front-updates">
+    <div class="container-fluid front-block front-block-light front-updates" style="padding-top: 0;">
         <div class="row" style="text-align:center">
             <h2><i>Our goal is to make 3D visualization and analysis approachable to domain-scientists so they
             can focus on the research questions at hand.</i></h2>
@@ -147,7 +147,8 @@
 
             <i>Need help getting the most out of PyVista? Want to sponsor development of new capabilities?</i>
             <br/>
-            Reach out to <a href="mailto:support@pyvista.org">support@pyvista.org</a> and we can help connect you with the right community experts to tackle your challenges.
+            <br/>
+            Please reach out to <a href="mailto:support@pyvista.org">support@pyvista.org</a> and we can connect you with the right community experts, who can help you confidently and efficiently use PyVista and/or tailor your custom software to leverage PyVista's robust 3D visualization capabilities.
 
             </div>
         </div>
