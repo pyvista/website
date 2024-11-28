@@ -2,12 +2,12 @@
 
 .. raw:: html
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-top: 0;">
       <h1 class="front-header" style="margin: 0;">The PyVista Project</h1>
       <img class="front-logo" src="_static/pyvista_banner.png" style="width: 100%;">
     </div>
 
-    <div class="container-fluid front-block front-block-light front-updates">
+    <div class="container-fluid front-block front-block-light front-updates" style="padding-top: 0;">
         <div class="row" style="text-align:center">
             <h2><i>Our goal is to make 3D visualization and analysis approachable to domain-scientists so they
             can focus on the research questions at hand.</i></h2>
