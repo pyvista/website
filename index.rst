@@ -178,7 +178,7 @@
             everyday!
             <br/>
             <br/>
-            PyVista is built on top of the <a href="https://wwww.vtk.org">Visualization Toolkit (VTK)</a>
+            PyVista is built on top of the <a href="https://www.vtk.org">Visualization Toolkit (VTK)</a>
             directly inheriting VTK mesh types and wrapping a layer of functionality on
             top of those types to make creation and analysis of those data structures
             simple and intuitive. This all means that PyVista is immediately interoperable
