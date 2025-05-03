@@ -28,7 +28,7 @@
             Streamlined, easy to use Python interface available on <a href="https://pypi.org/project/pyvista/">PyPI</a>
           </div>
           <div class="col-sm-4">
-            <a href="https://docs.pyvista.org/getting-started/what-is-a-mesh.html"><h2><i class="fas fa-cubes fa-2x"></i></h2></a>
+            <a href="https://docs.pyvista.org/getting-started/"><h2><i class="fas fa-cubes fa-2x"></i></h2></a>
             <b>3D Data Structures</b>
             <br>
             3D finite element/volume data structures at the core
