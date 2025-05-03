@@ -33,7 +33,12 @@
             <br>
             3D finite element/volume data structures at the core
           </div>
+        </div>
 
+        <div class="row" style="text-align:center">
+            </br>
+            <i>Get started with PyVista from <a href="https://docs.pyvista.org/getting-started/">our documentation</a></i>
+            <br>
         </div>
     </div>
 
@@ -49,92 +54,13 @@
             workflows, and build custom applications leveraging PyVista's 3D
             capabilities.</p>
 
-        <p>New to programming? Welcome! Many of PyVista's users are novice programmers
-        and we've designed PyVista to be intuitive and ready for beginners to get started
-        making compelling visualizations of spatial data.</p>
+            <p>New to programming? Welcome! Many of PyVista's users are novice programmers
+            and we've designed PyVista to be intuitive and ready for beginners to get started
+            making compelling visualizations of spatial data.</p>
 
             </div>
             <div class="col-sm-5">
-               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="5000">
-                 <ol class="carousel-indicators">
-                   <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="5"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="6"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="7"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="8"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="9"></li>
-                   <li data-target="#carousel-example-generic" data-slide-to="10"></li>
-                 </ol>
-                 <div class="carousel-inner" role="listbox">
-                   <div class="item active">
-                     <img src="_static/demo/salt-dome.gif">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/volume-opacity.png" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/tornado.jpeg" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/omfvista.gif" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/sphere-widget-c.gif" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/point-cloud.png" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/visible-cell-selection.gif" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/slider-widget-threshold.gif" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/tunneling.png" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/volume-rendering.gif" height="75%">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                   <div class="item">
-                     <img src="_static/demo/line-widget-streamlines.gif">
-                     <div class="carousel-caption">
-                     </div>
-                   </div>
-                 </div>
-                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                   <span class="sr-only">Previous</span>
-                 </a>
-                 <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                   <span class="sr-only">Next</span>
-                 </a>
-               </div>
+              <img src="_static/demo/volume-opacity.png" height="75%">
             </div>
         </div>
    </div>
