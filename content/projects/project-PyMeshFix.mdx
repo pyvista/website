@@ -1,0 +1,13 @@
+---
+title: PyMeshFix
+image: N/A
+status: stable
+github: https://github.com/pyvista/pymeshfix
+docs: https://pymeshfix.pyvista.org
+shortDescription: |
+  This software takes as input a polygon mesh and produces a copy of the input where all the occurrences of a specific set of “defects” are corrected. 
+longDescription: |
+  This software takes as input a polygon mesh and produces a copy of the input where all the occurrences of a specific set of “defects” are corrected. MeshFix has been designed to correct   typical flaws present in raw digitized mesh models, thus it might fail or produce coarse results if run on other sorts of input meshes (e.g. tessellated CAD models).
+
+  The input is assumed to represent a single closed solid object, thus the output will be a single watertight triangle mesh bounding a polyhedron. All the singularities, self-intersections and degenerate elements are removed from the input, while regions of the surface without defects are left unmodified.
+---
