@@ -3,3 +3,4 @@ sphinx-autobuild
 sphinx-notfound-page>=0.3.0
 sphinx_bootstrap_theme
 sphinxcontrib-websupport
+sphinx-toolbox==4.0.0
