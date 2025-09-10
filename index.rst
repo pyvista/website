@@ -145,3 +145,4 @@
 
    projects/index.rst
    cite/index.rst
+   blog/index.rst

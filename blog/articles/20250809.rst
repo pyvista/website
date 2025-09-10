@@ -1,0 +1,49 @@
+.. title:: Writing Parallel Files
+
+Improving PyVista to Optimize CAE Dataset Storage
+=================================================
+
+PyVista can read all of `VTK's File Formats <https://docs.vtk.org/en/latest/vtk_file_formats/index.html>`_ and many others that are supported by `meshio <https://github.com/nschloe/meshio>`_. However, at the time of writing this, PyVista lacks the support to write out VTK parallel files and this became an issue when needing to process datasets at the TB scale.
+
+Rational
+--------
+
+Computer aided engineering (CAE) datasets are huge and are only going to get larger as model sizes increase and as industury moves more towards simulation and automation. Moreover, CAE datasets are increasingly being used to train machine learning (ML) models and, as `well established <https://asmedigitalcollection.asme.org/mechanicaldesign/article/147/4/040301/1212567/Special-Issue-Design-by-Data-Cultivating-Datasets>`_, ML is highly dependent on high quality, large, and diverse public datasets.
+
+The aforementioned article, `Special Issue: Design by Data: Cultivating Datasets for Engineering Design <https://asmedigitalcollection.asme.org/mechanicaldesign/article/147/4/040301/1212567/Special-Issue-Design-by-Data-Cultivating-Datasets>_` includes a variety of CAE results including `DrivAerML <https://caemldatasets.org/drivaerml/>`_, a a high-fidelity open-source (CC-BY-SA) public dataset for automotive aerodynamics using 500 parametric morphed. This dataset can be downloaded directly from Hugging Face at `neashton/drivaerml <https://huggingface.co/datasets/neashton/drivaerml>`_, is an enormous 31 TB. This is one of the key issues with CAE datasets: high fidelity solutions often require many analyses and each analysis generates many Gigabytes of intermediate solutions. These results, from `OpenFOAM <https://www.openfoam.com/>`_ have been stored as VTU files as these are `Unstructured Grids <https://vtk.org/doc/nightly/html/classvtkUnstructuredGrid.html`>_.
+
+.. image:: ./images/drivaerml.png
+
+To process even a `single run <https://huggingface.co/datasets/neashton/drivaerml/tree/main/run_1>`_ of this dataset is requires downloading 51 GB, stored across two split ``.vtu`` files:
+
+.. code:: bash
+
+   volume_1.vtu.00.part
+   volume_1.vtu.01.part
+
+These files were split not according to any `VTK <https://vtk.org/>`_ scheme but most likely due to Hugging Face's `Storage Limits <https://huggingface.co/docs/hub/storage-limits>`_, which requires you to first download and concatenate the two files. Here we download the split ``.vtu`` files from `drivaerml Run 1 <https://huggingface.co/datasets/neashton/drivaerml/tree/main/run_1>`_:
+
+.. code:: bash
+
+   wget -O volume_1.vtu.00.part "https://huggingface.co/datasets/neashton/drivaerml/resolve/main/run_1/volume_1.vtu.00.part?download=true"
+   wget -O volume_1.vtu.01.part "https://huggingface.co/datasets/neashton/drivaerml/resolve/main/run_1/volume_1.vtu.01.part?download=true"
+   cat volume_1.vtu.00.part volume_1.vtu.01.part > volume_1.vtu
+   
+
+
+
+
+
+VTK supports a wide variety of formats, from the legacy ``*.vtk`` to the new XML formats which include both serial and parallel formats. Repeating VTK's `XML File Formats <https://docs.vtk.org/en/latest/vtk_file_formats/vtkxml_file_format.html`_:
+
+- ``(.vti)`` - Serial `vtkImageData <https://vtk.org/doc/nightly/html/classvtkImageData.html>`_
+- ``(.vtp)`` - Serial `vtkPolyData <https://vtk.org/doc/nightly/html/classvtkPolyData.html>`_
+- ``(.vtr)`` - Serial `vtkRectilinearGrid <https://vtk.org/doc/nightly/html/classvtkRectilinearGrid.html>`_
+- ``(.vts)`` - Serial `vtkStructuredGrid <https://vtk.org/doc/nightly/html/classvtkStructuredGrid.html>`_
+- ``(.vtu)`` - Serial `vtkUnstructuredGrid <https://vtk.org/doc/nightly/html/classvtkUnstructuredGrid.html>`_
+- ``(.pvti)`` - Parallel `vtkImageData <https://vtk.org/doc/nightly/html/classvtkImageData.html>`_
+- ``(.pvtp)`` - Parallel `vtkPolyData <https://vtk.org/doc/nightly/html/classvtkPolyData.html>`_
+- ``(.pvtr)`` - Parallel `vtkRectilinearGrid <https://vtk.org/doc/nightly/html/classvtkRectilinearGrid.html>`_
+- ``(.pvts)`` - Parallel `vtkStructuredGrid <https://vtk.org/doc/nightly/html/classvtkStructuredGrid.html>`_
+- ``(.pvtu)`` - Parallel `vtkUnstructuredGrid <https://vtk.org/doc/nightly/html/classvtkUnstructuredGrid.html>`_
+
