@@ -8,21 +8,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:export": "next build && next export",
+    "build:export": "next build",
     "predeploy": "npm run build:export",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out",
+    "serve": "cd out && python3 -m http.server 8080"
   },
   "dependencies": {
     "framer-motion": "^12.12.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.510.0",
-    "next": "15.3.2",
-    "next-mdx-remote": "^4.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "^16.0.2",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.2.17",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
