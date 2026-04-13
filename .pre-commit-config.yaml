@@ -1,53 +1,46 @@
-# Integration with GitHub Actions
-# See https://pre-commit.ci/
 ci:
-  autofix_prs: false
-  autoupdate_schedule: quarterly
+  autoupdate_commit_msg: 'chore: update pre-commit hooks'
+  autofix_commit_msg: 'style: pre-commit fixes'
+  autofix_prs: true
+  autoupdate_schedule: monthly
 
 repos:
-  - repo: https://github.com/keewis/blackdoc
-    rev: v0.4.6
-    hooks:
-      - id: blackdoc
-        files: '\.py$'
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: check-merge-conflict
-      - id: debug-statements
-      # - id: no-commit-to-branch
-      #   args: [--branch, main]
-      - id: requirements-txt-fixer
-      - id: trailing-whitespace
-      - id: check-docstring-first
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=4000]
       - id: end-of-file-fixer
+        exclude: ^(public/.*|.*\.svg)$
+      - id: trailing-whitespace
+        exclude: ^(public/.*|.*\.svg)$
       - id: mixed-line-ending
-
-  # this validates our github workflow files
-  - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.37.1
-    hooks:
-      - id: check-github-workflows
+        args: [--fix=lf]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.9
+    rev: v0.14.5
     hooks:
-      - id: ruff
-        args: [--fix, --show-fixes]
-        exclude: tests/core/typing
+      - id: ruff-check
+        args: [--fix]
       - id: ruff-format
-        exclude: tests/core/typing
 
-  - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.8.1
+  - repo: local
     hooks:
       - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]
+        name: prettier
+        # Runs the locally installed prettier (see package.json devDependencies)
+        # so that prettier-plugin-astro resolves from node_modules.
+        entry: npx --no-install prettier --write --ignore-unknown
+        language: system
+        pass_filenames: true
+        types_or: [javascript, ts, tsx, astro, css, json, yaml, markdown]
 
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.2
     hooks:
-      - id: rst-backticks
-      - id: rst-directive-colons
-      - id: rst-inline-touching-normal
+      - id: codespell
+        additional_dependencies: [tomli]
+        exclude: ^(package-lock\.json|public/|dist/|\.astro/)

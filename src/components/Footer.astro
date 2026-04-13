@@ -1,0 +1,30 @@
+---
+import { communityLinks } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-intro">
+      <img class="footer-logo" src="/branding/pyvista.svg" alt="PyVista" />
+      <p>
+        PyVista is a NumFOCUS affiliated project focused on making 3D plotting, and mesh analysis
+        approachable for scientists, engineers, and developers.
+      </p>
+      <address class="footer-contact">
+        <span>Support</span>
+        <a class="footer-email" href="mailto:support@pyvista.org">support@pyvista.org</a>
+      </address>
+    </div>
+
+    <div class="footer-links">
+      {
+        communityLinks.map((item) => (
+          <a href={item.href}>
+            <strong>{item.title}</strong>
+            <span>{item.description}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>

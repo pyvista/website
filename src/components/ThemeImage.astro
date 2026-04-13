@@ -1,0 +1,20 @@
+---
+import type { ThemedImage } from '../data/site';
+
+interface Props {
+  image: ThemedImage;
+  alt: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { image, alt, loading = 'lazy' } = Astro.props;
+---
+
+<img
+  src={image.dark}
+  data-theme-media
+  data-light-src={image.light}
+  data-dark-src={image.dark}
+  alt={alt}
+  loading={loading}
+/>

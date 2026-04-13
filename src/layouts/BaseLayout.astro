@@ -1,0 +1,103 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { siteMeta } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = siteMeta.title, description = siteMeta.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/hero-volume-rendering-dark.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#08131d" />
+    <link rel="icon" href="/branding/pyvista_sq.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem('pyvista-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <Header />
+    <slot />
+    <Footer />
+    <script is:inline>
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const updateThemeMedia = (theme) => {
+        document.querySelectorAll('[data-theme-media]').forEach((image) => {
+          const nextSrc = image.getAttribute(theme === 'dark' ? 'data-dark-src' : 'data-light-src');
+
+          if (nextSrc && image.getAttribute('src') !== nextSrc) {
+            image.setAttribute('src', nextSrc);
+          }
+        });
+      };
+
+      const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        localStorage.setItem('pyvista-theme', theme);
+        updateThemeMedia(theme);
+      };
+
+      updateThemeMedia(root.dataset.theme ?? 'dark');
+
+      toggle?.addEventListener('click', () => {
+        const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      });
+
+      document.querySelectorAll('[data-copy]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const value = button.getAttribute('data-copy') ?? '';
+          const label = button.getAttribute('data-copy-label') ?? 'Copy';
+          const span = button.querySelector('span');
+          const applyCopyState = (state, text) => {
+            button.dataset.copyState = state;
+            button.setAttribute('aria-label', text);
+            button.setAttribute('title', text);
+            if (span) {
+              span.textContent = text;
+            }
+
+            window.setTimeout(() => {
+              button.dataset.copyState = 'idle';
+              button.setAttribute('aria-label', label);
+              button.setAttribute('title', label);
+              if (span) {
+                span.textContent = label;
+              }
+            }, 1800);
+          };
+
+          try {
+            await navigator.clipboard.writeText(value);
+            applyCopyState('copied', 'Copied');
+          } catch {
+            applyCopyState('unavailable', 'Unavailable');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

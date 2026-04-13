@@ -1,0 +1,22 @@
+{
+  "name": "pyvista-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "render:screenshots": "uv run --with pyvista --with imageio python scripts/render_marketing_images.py",
+    "lint": "uvx pre-commit run --all-files"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.7.10",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "shiki": "^1.29.2",
+    "typescript": "^5.8.3"
+  }
+}

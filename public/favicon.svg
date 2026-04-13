@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="PyVista">
+  <defs>
+    <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#39a7ff" />
+      <stop offset="100%" stop-color="#0079b5" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#08131d" />
+  <path fill="url(#g)" d="M31 24h36c19 0 31 10 31 27 0 12-6 20-17 24l20 29H75L58 79H47v25H31V24zm16 14v27h18c10 0 16-5 16-13s-6-14-16-14H47z" />
+</svg>
