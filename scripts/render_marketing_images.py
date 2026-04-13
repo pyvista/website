@@ -220,6 +220,7 @@ def render_pump_bracket(theme: RenderTheme) -> None:
     scalar_name = 'disp_6_magnitude'
     mode_values = np.linalg.norm(dataset[mode_shape], axis=1)
     scalar_limit = float(mode_values.max()) * 0.05
+    cmap = 'coolwarm_r' if theme.name == 'dark' else 'coolwarm'
 
     plotter = new_plotter(background=theme.surface_background)
     plotter.camera_position = pv.CameraPosition(
@@ -243,7 +244,7 @@ def render_pump_bracket(theme: RenderTheme) -> None:
         animated_actor = plotter.add_mesh(
             warped,
             scalars=scalar_name,
-            cmap='coolwarm',
+            cmap=cmap,
             clim=(-scalar_limit, scalar_limit),
             ambient=0.22,
             specular=0.1,
@@ -264,7 +265,7 @@ def render_aero_bracket(theme: RenderTheme) -> None:
     """Render the static aero bracket FEA result shown beside the code snippet."""
     mesh = examples.download_aero_bracket()
     scalar_name = 'von Mises stress'
-    cmap = 'magma' if theme.name == 'dark' else 'cividis'
+    cmap = 'turbo' if theme.name == 'dark' else 'cividis'
 
     plotter = new_plotter(background=theme.surface_background)
     plotter.add_mesh(
@@ -290,7 +291,7 @@ def render_cfd_data(theme: RenderTheme) -> None:
     block = examples.download_openfoam_tubes()
     air = block[0]
     inlet = block[1][2]
-    cmap = 'magma' if theme.name == 'dark' else 'cividis'
+    cmap = 'turbo' if theme.name == 'dark' else 'cividis'
 
     pset = pv.PointSet(inlet.points[::20])
     lines = air.streamlines_from_source(pset, vectors='U', max_length=1.0).compute_arc_length()
