@@ -27,6 +27,37 @@ const exampleHtml = await codeToHtml(exampleCommand, {
   lang: 'python',
   theme: 'github-dark',
 });
+
+type Contributor = {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  type: string;
+  contributions: number;
+};
+
+let contributors: Contributor[] = [];
+try {
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github+json',
+    'User-Agent': 'pyvista-website-build',
+  };
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+  const response = await fetch(
+    'https://api.github.com/repos/pyvista/pyvista/contributors?per_page=100',
+    { headers },
+  );
+  if (response.ok) {
+    const payload = (await response.json()) as Contributor[];
+    contributors = payload.filter((c) => c.type !== 'Bot' && !c.login.endsWith('[bot]'));
+  } else {
+    console.warn(`GitHub contributors API returned ${response.status}`);
+  }
+} catch (error) {
+  console.warn('Failed to fetch contributors:', error);
+}
 ---
 
 <BaseLayout>
@@ -286,7 +317,49 @@ const exampleHtml = await codeToHtml(exampleCommand, {
       </div>
     </section>
 
-    <section class="section" id="citation">
+    {
+      contributors.length > 0 && (
+        <section class="section" id="contributors">
+          <div class="container">
+            <SectionHeader
+              eyebrow="Contributors"
+              title="Built by a global community."
+              intro="PyVista is developed and maintained by contributors from all backgrounds. Thank you to everyone who has helped shape the project."
+            />
+            <ul class="contributor-grid" aria-label="PyVista contributors">
+              {contributors.map((c) => (
+                <li>
+                  <a
+                    class="contributor-link"
+                    href={c.html_url}
+                    title={`${c.login} — ${c.contributions} contributions`}
+                    aria-label={c.login}
+                  >
+                    <img
+                      src={`${c.avatar_url}&s=96`}
+                      alt={c.login}
+                      loading="lazy"
+                      width="48"
+                      height="48"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="button-row button-row-compact section-actions">
+              <a
+                class="button button-secondary"
+                href="https://github.com/pyvista/pyvista/graphs/contributors"
+              >
+                See all contributors on GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section section-tinted" id="citation">
       <div class="container citation-section">
         <SectionHeader
           eyebrow="Cite PyVista"
