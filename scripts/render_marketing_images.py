@@ -389,7 +389,7 @@ def render_og_image() -> None:
     plotter = pv.Plotter(off_screen=True, window_size=OG_WINDOW_SIZE)
     # Matches the light-mode site background (``--surface-soft`` with a tint
     # of ``--accent-soft`` mixed in) so the card blends with the landing page.
-    plotter.set_background('#e3edf7')
+    plotter.set_background('#F6F8FC')
     plotter.enable_anti_aliasing('msaa')
     plotter.set_environment_texture(cubemap)
     plotter.add_mesh(
