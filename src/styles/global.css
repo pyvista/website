@@ -50,6 +50,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 80%;
 }
 
 body {
@@ -535,8 +536,7 @@ main {
 .install-strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.1rem;
+  gap: 0.6rem;
   margin-top: 0;
   padding: 1rem 1.1rem;
   border: 1px solid var(--border);
@@ -550,6 +550,14 @@ main {
   display: grid;
   gap: 0.35rem;
   min-width: 0;
+  flex: 1;
+}
+
+.install-command::before {
+  content: '$';
+  margin-right: 0.6rem;
+  color: color-mix(in srgb, var(--code-text) 45%, transparent);
+  user-select: none;
 }
 
 .install-label {
@@ -577,17 +585,20 @@ main {
   overflow-y: hidden;
 }
 
-.section-header-trust-row {
+.section-header-trust {
   display: grid;
-  grid-template-columns: fit-content(80ch) auto;
-  justify-content: start;
-  gap: 1rem;
-  margin-top: 0.8rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
   align-items: center;
 }
 
-.section-header-trust-row p {
-  margin: 0;
+.section-header-trust-text {
+  min-width: 0;
+}
+
+.section-header-trust-text p {
+  margin: 0.6rem 0 0;
+  max-width: 80ch;
 }
 
 .panel-topline,
@@ -909,7 +920,7 @@ main {
   .hero-utility-row,
   .hero-topcards,
   .hero-grid,
-  .section-header-trust-row,
+  .section-header-trust,
   .section-split,
   .example-gallery-grid,
   .feature-grid,
