@@ -8,16 +8,21 @@ JPEG and GIF pairs consumed by ``src/data/site.ts``.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from io import BytesIO
 from pathlib import Path
 
+import cairosvg
 import numpy as np
 import pyvista as pv
 from PIL import Image, ImageSequence
 from pyvista import examples
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_DIR = ROOT / 'public' / 'images'
+PUBLIC_DIR = ROOT / 'public'
+OUTPUT_DIR = PUBLIC_DIR / 'images'
 WINDOW_SIZE = (1800, 1200)
+# Open Graph / Twitter card spec: 1200x630 = 1.91:1.
+OG_WINDOW_SIZE = (1200, 630)
 JPEG_QUALITY = 86
 
 # GIF compression settings. GIFs are shown at card size (~600 px wide) so
@@ -363,6 +368,99 @@ def render_cfd_data(theme: RenderTheme) -> None:
     print(f'Saved {output_path.relative_to(ROOT)}')
 
 
+def _rasterize_svg(path: Path, *, width: int) -> Image.Image:
+    """Rasterize an SVG file to a transparent PIL image at the given width."""
+    png_bytes = cairosvg.svg2png(url=str(path), output_width=width)
+    return Image.open(BytesIO(png_bytes)).convert('RGBA')
+
+
+def render_og_image() -> None:
+    """Render the 1200x630 social share banner used as the OpenGraph image.
+
+    Uses the light-themed PBR Nefertiti scene, offset to the right via the
+    camera's window center, and composites the PyVista wordmark (rasterized
+    from ``public/branding/pyvista.svg``) and a tagline on top. Text is drawn
+    by VTK's built-in Arial font for a cleaner look than PIL's bundled fonts.
+    """
+    mesh = examples.download_nefertiti()
+    mesh.rotate_x(-90.0, inplace=True)
+    cubemap = examples.download_sky_box_cube_map()
+
+    plotter = pv.Plotter(off_screen=True, window_size=OG_WINDOW_SIZE)
+    # Matches the light-mode site background (``--surface-soft`` with a tint
+    # of ``--accent-soft`` mixed in) so the card blends with the landing page.
+    plotter.set_background('#e3edf7')
+    plotter.enable_anti_aliasing('msaa')
+    plotter.set_environment_texture(cubemap)
+    plotter.add_mesh(
+        mesh,
+        color='salmon',
+        pbr=True,
+        metallic=0.8,
+        roughness=0.1,
+        diffuse=1.0,
+        show_scalar_bar=False,
+    )
+    plotter.camera_position = pv.CameraPosition(
+        position=(-313.40, 66.09, 1000.61),
+        focal_point=(0.0, 0.0, 0.0),
+        viewup=(0.018, 0.99, -0.06),
+    )
+    # Shift the projection so the subject sits in the right portion of the
+    # canvas, leaving the left clear for the wordmark and tagline. Negative
+    # x on ``SetWindowCenter`` translates the image to the right.
+    plotter.camera.SetWindowCenter(-0.55, 0.0)
+    plotter.camera.zoom(1.05)
+
+    # VTK text coords are pixels from the bottom-left corner.
+    # VTK text coords are pixels from the bottom-left corner. The PyVista SVG
+    # has a ~2.35:1 aspect, so at width 640 the logo is ~272 px tall, and its
+    # bottom edge sits at y=(630-60-272)=298 from the bottom. Drop the tagline
+    # well below that.
+    plotter.add_text(
+        '3D plotting & analysis',
+        position=(64, 230),
+        font_size=28,
+        color='#0f1f32',
+        shadow=False,
+        font='arial',
+    )
+    made_easy = plotter.add_text(
+        'made easy',
+        position=(64, 180),
+        font_size=28,
+        color='#0f1f32',
+        shadow=False,
+        font='arial',
+    )
+    made_easy.GetTextProperty().SetItalic(True)
+    plotter.add_text(
+        'pyvista.org',
+        position=(66, 54),
+        font_size=20,
+        color='#0f1f32',
+        shadow=False,
+        font='arial',
+    )
+
+    screenshot = plotter.screenshot(return_img=True)
+    plotter.close()
+
+    canvas = Image.fromarray(screenshot).convert('RGBA')
+    logo = _rasterize_svg(PUBLIC_DIR / 'branding' / 'pyvista.svg', width=640)
+    canvas.alpha_composite(logo, dest=(60, 60))
+
+    output_path = PUBLIC_DIR / 'og-image.jpg'
+    canvas.convert('RGB').save(
+        output_path,
+        format='JPEG',
+        quality=90,
+        optimize=True,
+        progressive=True,
+    )
+    print(f'Saved {output_path.relative_to(ROOT)}')
+
+
 RENDERERS = (
     render_volume_rendering,
     render_gltf,
@@ -379,6 +477,7 @@ def main() -> None:
     for theme in RENDER_THEMES:
         for renderer in RENDERERS:
             renderer(theme)
+    render_og_image()
 
 
 if __name__ == '__main__':

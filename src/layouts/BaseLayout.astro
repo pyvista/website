@@ -10,6 +10,9 @@ interface Props {
 }
 
 const { title = siteMeta.title, description = siteMeta.description } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
 ---
 
 <!doctype html>
@@ -19,11 +22,20 @@ const { title = siteMeta.title, description = siteMeta.description } = Astro.pro
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/images/hero-volume-rendering-dark.jpg" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="PyVista" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PyVista — 3D plotting & analysis made easy" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="theme-color" content="#08131d" />
     <link rel="icon" href="/branding/pyvista_sq.svg" type="image/svg+xml" />
     <title>{title}</title>
