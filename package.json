@@ -8,7 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "render:screenshots": "uv run --with pyvista --with imageio python scripts/render_marketing_images.py",
+    "render:screenshots": "uv run --with pyvista --with imageio --with cairosvg python scripts/render_marketing_images.py",
     "lint": "uvx pre-commit run --all-files"
   },
   "devDependencies": {
