@@ -1,0 +1,322 @@
+---
+import { codeToHtml } from 'shiki';
+
+import CopyButton from '../components/CopyButton.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ThemeImage from '../components/ThemeImage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  citation,
+  exampleGallery,
+  ecosystemProjects,
+  exampleSpotlight,
+  featureCards,
+  hero,
+  heroScreenshots,
+  numfocus,
+  resourceCards,
+  trustBadges,
+} from '../data/site';
+
+const exampleCommand = `from pyvista import examples
+
+mesh = examples.download_aero_bracket()
+mesh.plot()`;
+
+const exampleHtml = await codeToHtml(exampleCommand, {
+  lang: 'python',
+  theme: 'github-dark',
+});
+---
+
+<BaseLayout>
+  <main id="content">
+    <section class="hero section" id="top">
+      <div class="container hero-shell">
+        <div class="hero-topline">
+          <div class="hero-head">
+            <h1>
+              {hero.title}
+              <em>{hero.titleEmphasis}</em>
+            </h1>
+          </div>
+        </div>
+
+        <div class="hero-topcards">
+          <article class="hero-mission-card">
+            <p class="section-eyebrow">Mission</p>
+            <p class="hero-mission">{hero.mission}</p>
+          </article>
+
+          <div class="install-strip">
+            <div class="install-inline">
+              <span class="install-label">Quick install</span>
+              <code class="install-command">{hero.installCommand}</code>
+            </div>
+            <CopyButton value={hero.installCommand} />
+          </div>
+        </div>
+
+        <div class="hero-utility-row">
+          <div class="hero-actions-row">
+            <div class="button-row">
+              <a
+                class="button button-secondary hero-icon-button"
+                href="https://docs.pyvista.org/"
+                aria-label="Read the documentation"
+                title="Read the documentation"
+              >
+                <svg class="hero-button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M7.5 3.75h6.75L18.75 8.25V18A2.25 2.25 0 0 1 16.5 20.25h-9A2.25 2.25 0 0 1 5.25 18V6A2.25 2.25 0 0 1 7.5 3.75Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M14.25 3.75V8.25h4.5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M9 12h6"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M9 15.75h6"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </a>
+              <a
+                class="button button-secondary hero-icon-button"
+                href="https://github.com/pyvista/pyvista"
+                aria-label="View on GitHub"
+                title="View on GitHub"
+              >
+                <svg
+                  class="hero-button-icon hero-button-icon-fill"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-1.98c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.72-1.52-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.08 0 4.41-2.68 5.37-5.24 5.65.41.35.77 1.04.77 2.11v3.12c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+
+            <div class="badge-list">
+              {
+                trustBadges.map((item) => (
+                  <a class="badge-link" href={item.href}>
+                    {item.label}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media-grid" aria-label="Featured PyVista screenshots">
+          {
+            heroScreenshots.map((shot, index) => (
+              <figure class="hero-shot">
+                <a class="visual-link" href={shot.href}>
+                  <ThemeImage
+                    image={shot.image}
+                    alt={shot.alt}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                  <figcaption>{shot.label}</figcaption>
+                </a>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why-pyvista">
+      <div class="container">
+        <div class="section-header section-header-trust">
+          <h2>A professional foundation for modern 3D workflows.</h2>
+          <div class="section-header-trust-row">
+            <p>
+              PyVista gives teams a dependable 3D layer for modern Python workflows, with
+              array-native data exchange, direct memory sharing where possible, and clean
+              interoperability across the scientific Python ecosystem.
+            </p>
+            <a class="numfocus-lockup numfocus-lockup-inline" href={numfocus.href}>
+              <img src={numfocus.image} alt={numfocus.alt} loading="lazy" />
+              <span class="numfocus-tag">Affiliated</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card-grid feature-grid">
+          {
+            featureCards.map((card) => (
+              <article class="content-card accent-card">
+                <p class="card-eyebrow">{card.eyebrow}</p>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="example">
+      <div class="container">
+        <div class="section-split example-top-grid">
+          <div>
+            <SectionHeader
+              eyebrow="Example spotlight"
+              title="A small Python snippet that still feels production-ready."
+              intro="PyVista can turn a concise script into a polished engineering visualization. This snippet uses the built-in aero bracket dataset and shows the resulting plot beside the code."
+            />
+
+            <article class="code-panel example-panel">
+              <div class="panel-topline">
+                <span>Python example</span>
+                <CopyButton value={exampleCommand} />
+              </div>
+              <div class="code-block" set:html={exampleHtml} />
+            </article>
+          </div>
+
+          <figure class="feature-visual">
+            <a class="visual-link" href={exampleSpotlight.href}>
+              <ThemeImage
+                image={exampleSpotlight.image}
+                alt={exampleSpotlight.alt}
+                loading="lazy"
+              />
+              <figcaption>{exampleSpotlight.label}</figcaption>
+            </a>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="explore">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Explore PyVista"
+          title="Start with the docs, examples, and API guides."
+          intro="The documentation is the best place to start, whether you are installing PyVista for the first time, browsing examples, or moving deeper into the API and related projects."
+        />
+
+        <div class="card-grid resource-card-grid">
+          {
+            resourceCards.map((item) => (
+              <article class="content-card link-card resource-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <a class="card-action" href={item.href}>
+                  {item.cta}
+                </a>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="card-grid example-gallery-grid">
+          {
+            exampleGallery.map((item) => (
+              <figure class="feature-visual">
+                <a class="visual-link" href={item.href}>
+                  <ThemeImage image={item.image} alt={item.alt} loading="lazy" />
+                  <figcaption>{item.label}</figcaption>
+                </a>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="ecosystem">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Ecosystem"
+          title="PyVista is the foundation for a growing ecosystem."
+          intro="Official and community projects alike continue to extend PyVista into mesh repair, meshing, testing, desktop tooling, and production workflows."
+        />
+
+        <div class="card-grid ecosystem-grid">
+          {
+            ecosystemProjects.map((project) => (
+              <article class="content-card link-card project-card">
+                <div class="project-header">
+                  <h3>{project.name}</h3>
+                  <span class={`status-pill status-${project.kind}`}>{project.badge}</span>
+                </div>
+                <p>{project.description}</p>
+                <div class="card-link-row">
+                  <a class="card-action" href={project.href}>
+                    Project
+                  </a>
+                  {project.secondaryHref && (
+                    <a class="card-action card-action-muted" href={project.secondaryHref}>
+                      {project.secondaryLabel}
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="button-row button-row-compact section-actions">
+          <a
+            class="button button-secondary"
+            href="https://docs.pyvista.org/getting-started/connections.html"
+          >
+            Explore more connections
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container citation-section">
+        <SectionHeader
+          eyebrow="Cite PyVista"
+          title="Published, citable, and easy to reference."
+          intro="If PyVista supports your research, please help our scientific visibility by citing our work."
+        />
+
+        <div class="citation-actions">
+          <a class="button button-primary" href={citation.paper}>View the JOSS paper</a>
+          <a class="button button-secondary" href={citation.doi}>Open DOI</a>
+        </div>
+
+        <div class="citation-stack">
+          <article class="code-panel">
+            <div class="panel-topline">
+              <span>Plain text citation</span>
+              <CopyButton value={citation.text} />
+            </div>
+            <pre class="plain-block"><code>{citation.text}</code></pre>
+          </article>
+
+          <article class="code-panel">
+            <div class="panel-topline">
+              <span>BibTeX</span>
+              <CopyButton value={citation.bibtex} />
+            </div>
+            <pre class="plain-block"><code>{citation.bibtex}</code></pre>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
