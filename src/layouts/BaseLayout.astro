@@ -41,10 +41,8 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
     <title>{title}</title>
     <script is:inline>
       (() => {
-        const storedTheme = localStorage.getItem('pyvista-theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
-        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.theme = prefersDark ? 'dark' : 'light';
       })();
     </script>
   </head>
@@ -55,7 +53,6 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
     <Footer />
     <script is:inline>
       const root = document.documentElement;
-      const toggle = document.querySelector('[data-theme-toggle]');
       const updateThemeMedia = (theme) => {
         document.querySelectorAll('[data-theme-media]').forEach((image) => {
           const nextSrc = image.getAttribute(theme === 'dark' ? 'data-dark-src' : 'data-light-src');
@@ -68,15 +65,14 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
 
       const applyTheme = (theme) => {
         root.dataset.theme = theme;
-        localStorage.setItem('pyvista-theme', theme);
         updateThemeMedia(theme);
       };
 
       updateThemeMedia(root.dataset.theme ?? 'dark');
 
-      toggle?.addEventListener('click', () => {
-        const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        applyTheme(nextTheme);
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      media.addEventListener('change', (event) => {
+        applyTheme(event.matches ? 'dark' : 'light');
       });
 
       document.querySelectorAll('[data-copy]').forEach((button) => {

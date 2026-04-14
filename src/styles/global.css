@@ -231,8 +231,7 @@ main {
 }
 
 .button,
-.copy-button,
-.theme-toggle {
+.copy-button {
   font: inherit;
 }
 
@@ -252,8 +251,7 @@ main {
 }
 
 .button:hover,
-.copy-button:hover,
-.theme-toggle:hover {
+.copy-button:hover {
   transform: translateY(-1px);
 }
 
@@ -330,33 +328,6 @@ main {
 }
 
 .copy-button[data-copy-state='copied'] .copy-icon-check {
-  display: block;
-}
-
-.theme-toggle {
-  display: inline-grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface-strong);
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.theme-icon {
-  width: 1rem;
-  height: 1rem;
-}
-
-.theme-icon-moon,
-:root[data-theme='dark'] .theme-icon-sun {
-  display: none;
-}
-
-:root[data-theme='dark'] .theme-icon-moon {
   display: block;
 }
 
