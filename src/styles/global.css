@@ -74,6 +74,11 @@ body {
   line-height: 1.6;
 }
 
+p {
+  font-size: 1.22rem;
+  line-height: 1.65;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -380,7 +385,7 @@ main {
 .hero-mission {
   max-width: none;
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.28rem;
 }
 
 .hero-mission-card {
