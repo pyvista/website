@@ -1,47 +1,51 @@
 :root {
   color-scheme: light;
-  --bg: #f5f8fc;
-  --surface: rgba(255, 255, 255, 0.82);
+  --bg: #fbfbfd;
+  --surface: rgba(255, 255, 255, 0.88);
   --surface-strong: #ffffff;
-  --surface-soft: #edf4fb;
-  --border: rgba(14, 33, 54, 0.12);
-  --text: #0f1f32;
-  --muted: #4e6279;
+  --surface-soft: #eef1f5;
+  --border: rgba(12, 18, 28, 0.16);
+  --text: #05080d;
+  --muted: #384050;
   --accent: #0079b5;
-  --accent-strong: #005d88;
-  --accent-soft: rgba(0, 121, 181, 0.12);
-  --official-badge-bg: rgba(0, 121, 181, 0.14);
-  --official-badge-border: rgba(0, 121, 181, 0.28);
-  --official-badge-text: #005d88;
-  --community-badge-bg: rgba(189, 123, 17, 0.14);
-  --community-badge-border: rgba(189, 123, 17, 0.28);
-  --community-badge-text: #8d5706;
-  --shadow: 0 18px 50px rgba(15, 31, 50, 0.08);
+  --accent-strong: #004a6d;
+  --accent-soft: rgba(0, 121, 181, 0.14);
+  --official-badge-bg: rgba(0, 121, 181, 0.16);
+  --official-badge-border: rgba(0, 121, 181, 0.34);
+  --official-badge-text: #004a6d;
+  --community-badge-bg: rgba(189, 123, 17, 0.16);
+  --community-badge-border: rgba(189, 123, 17, 0.36);
+  --community-badge-text: #6f4405;
+  --shadow: 0 18px 50px rgba(10, 18, 30, 0.1);
   --code-bg: #0a1623;
   --code-text: #eaf3ff;
+  --bg-glow-a: rgba(57, 167, 255, 0.14);
+  --bg-glow-b: rgba(0, 121, 181, 0.16);
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #06111a;
-  --surface: rgba(8, 19, 29, 0.88);
-  --surface-strong: #091725;
-  --surface-soft: #0d1f31;
-  --border: rgba(139, 181, 222, 0.14);
-  --text: #edf5ff;
-  --muted: #adc0d6;
-  --accent: #39a7ff;
-  --accent-strong: #7bc0ff;
-  --accent-soft: rgba(57, 167, 255, 0.18);
-  --official-badge-bg: rgba(57, 167, 255, 0.18);
-  --official-badge-border: rgba(57, 167, 255, 0.34);
-  --official-badge-text: #9fd4ff;
-  --community-badge-bg: rgba(232, 173, 77, 0.18);
+  --bg: #07080a;
+  --surface: rgba(18, 19, 22, 0.88);
+  --surface-strong: #131418;
+  --surface-soft: #1b1c21;
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #f4f5f7;
+  --muted: #b8bcc4;
+  --accent: #4db5ff;
+  --accent-strong: #8ecdff;
+  --accent-soft: rgba(77, 181, 255, 0.16);
+  --official-badge-bg: rgba(77, 181, 255, 0.14);
+  --official-badge-border: rgba(77, 181, 255, 0.32);
+  --official-badge-text: #a8d4ff;
+  --community-badge-bg: rgba(232, 173, 77, 0.16);
   --community-badge-border: rgba(232, 173, 77, 0.34);
   --community-badge-text: #ffd799;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
-  --code-bg: #04101a;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  --code-bg: #050608;
   --code-text: #eaf3ff;
+  --bg-glow-a: rgba(77, 181, 255, 0.05);
+  --bg-glow-b: rgba(0, 121, 181, 0.06);
 }
 
 * {
@@ -56,8 +60,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(57, 167, 255, 0.16), transparent 28%),
-    radial-gradient(circle at top right, rgba(0, 121, 181, 0.18), transparent 24%), var(--bg);
+    radial-gradient(circle at top left, var(--bg-glow-a), transparent 28%),
+    radial-gradient(circle at top right, var(--bg-glow-b), transparent 24%), var(--bg);
   color: var(--text);
   font-family:
     Inter,

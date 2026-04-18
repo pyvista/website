@@ -33,11 +33,6 @@ JPEG_QUALITY = 86
 GIF_MAX_WIDTH = 720
 GIF_PALETTE_COLORS = 64
 
-# Warmer/neutral light-mode surfaces used by a handful of renders that need
-# more contrast than the default ``RenderTheme.surface_background``.
-LIGHT_WARM_BACKGROUND = '#dbe7f2'
-LIGHT_NEUTRAL_BACKGROUND = '#eef2f6'
-
 
 @dataclass(frozen=True)
 class RenderTheme:
@@ -52,15 +47,15 @@ class RenderTheme:
 RENDER_THEMES = (
     RenderTheme(
         name='dark',
-        background='#07111b',
-        surface_background='#091725',
+        background='#07080a',
+        surface_background='#131418',
         ghost_color='white',
     ),
     RenderTheme(
         name='light',
-        background='#eef3f8',
-        surface_background='#f7f9fc',
-        ghost_color='#0f172a',
+        background='#fbfbfd',
+        surface_background='#ffffff',
+        ghost_color='#05080d',
     ),
 )
 
@@ -161,8 +156,7 @@ def render_volume_rendering(theme: RenderTheme) -> None:
     skull_surface = skull.contour_labels()
     cmap = 'bone' if theme.name == 'dark' else 'viridis'
 
-    background = theme.surface_background if theme.name == 'dark' else LIGHT_WARM_BACKGROUND
-    plotter = new_plotter(background=background)
+    plotter = new_plotter(background=theme.surface_background)
     plotter.add_mesh(skull_surface, color='white')
     plotter.add_volume(cropped_ct, cmap=cmap, opacity_unit_distance=10, show_scalar_bar=False)
     plotter.camera_position = pv.CameraPosition(
@@ -179,8 +173,7 @@ def render_gltf(theme: RenderTheme) -> None:
     helmet_file = examples.gltf.download_damaged_helmet()
     environment = examples.download_dikhololo_night()
 
-    background = theme.surface_background if theme.name == 'dark' else LIGHT_NEUTRAL_BACKGROUND
-    plotter = new_plotter(background=background)
+    plotter = new_plotter(background=theme.surface_background)
     plotter.import_gltf(helmet_file)
     plotter.set_environment_texture(environment)
     plotter.camera.zoom(1.7)
@@ -193,8 +186,7 @@ def render_pbr(theme: RenderTheme) -> None:
     mesh.rotate_x(-90.0, inplace=True)
     cubemap = examples.download_sky_box_cube_map()
 
-    background = theme.surface_background if theme.name == 'dark' else LIGHT_NEUTRAL_BACKGROUND
-    plotter = new_plotter(background=background)
+    plotter = new_plotter(background=theme.surface_background)
     plotter.set_environment_texture(cubemap)
     plotter.add_mesh(
         mesh,
@@ -308,7 +300,7 @@ def render_cfd_data(theme: RenderTheme) -> None:
     )
     grid = pv.ImageData(dimensions=dimensions, spacing=spacing, origin=origin).sample(air)
 
-    plotter = new_plotter(background=theme.background)
+    plotter = new_plotter(background=theme.surface_background)
     plotter.add_volume(
         grid,
         scalars='nut',
@@ -390,7 +382,7 @@ def render_og_image() -> None:
     plotter = pv.Plotter(off_screen=True, window_size=OG_WINDOW_SIZE)
     # Matches the light-mode site background (``--surface-soft`` with a tint
     # of ``--accent-soft`` mixed in) so the card blends with the landing page.
-    plotter.set_background('#F6F8FC')
+    plotter.set_background('#f4f6fa')
     plotter.enable_anti_aliasing('msaa')
     plotter.set_environment_texture(cubemap)
     plotter.add_mesh(
@@ -422,7 +414,7 @@ def render_og_image() -> None:
         '3D plotting & analysis',
         position=(64, 230),
         font_size=28,
-        color='#0f1f32',
+        color='#05080d',
         shadow=False,
         font='arial',
     )
@@ -430,7 +422,7 @@ def render_og_image() -> None:
         'made easy',
         position=(64, 180),
         font_size=28,
-        color='#0f1f32',
+        color='#05080d',
         shadow=False,
         font='arial',
     )
@@ -439,7 +431,7 @@ def render_og_image() -> None:
         'pyvista.org',
         position=(66, 54),
         font_size=20,
-        color='#0f1f32',
+        color='#05080d',
         shadow=False,
         font='arial',
     )
