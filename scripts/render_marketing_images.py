@@ -59,6 +59,14 @@ RENDER_THEMES = (
     ),
 )
 
+# Default camera for the Stanford Dragon after
+# ``dragon.rotate_x(90).rotate_z(180)``.
+DRAGON_CAMERA: pv.CameraPosition = pv.CameraPosition(
+    (0.19637734434577541, 0.15308352217414058, 0.21255194071445023),
+    (0.03109416650552175, -0.026243436194335598, 0.14759651678929947),
+    (-0.17442750670435944, -0.18924826253837831, 0.9663126512837891),
+)
+
 
 def configure_theme() -> None:
     """Configure PyVista defaults for clean marketing screenshots."""
@@ -182,8 +190,7 @@ def render_gltf(theme: RenderTheme) -> None:
 
 def render_pbr(theme: RenderTheme) -> None:
     """Render the physically based rendering example."""
-    mesh = examples.download_nefertiti()
-    mesh.rotate_x(-90.0, inplace=True)
+    mesh = examples.download_dragon().rotate_x(90).rotate_z(180)
     cubemap = examples.download_sky_box_cube_map()
 
     plotter = new_plotter(background=theme.surface_background)
@@ -197,11 +204,7 @@ def render_pbr(theme: RenderTheme) -> None:
         diffuse=1.0,
         show_scalar_bar=False,
     )
-    plotter.camera_position = pv.CameraPosition(
-        position=(-313.40, 66.09, 1000.61),
-        focal_point=(0.0, 0.0, 0.0),
-        viewup=(0.018, 0.99, -0.06),
-    )
+    plotter.camera_position = DRAGON_CAMERA
     save_screenshot(plotter, 'hero-pbr', theme)
 
 
@@ -370,40 +373,37 @@ def _rasterize_svg(path: Path, *, width: int) -> Image.Image:
 def render_og_image() -> None:
     """Render the 1200x630 social share banner used as the OpenGraph image.
 
-    Uses the light-themed PBR Nefertiti scene, offset to the right via the
+    Uses the aero bracket von-Mises stress scene, offset to the right via the
     camera's window center, and composites the PyVista wordmark (rasterized
     from ``public/branding/pyvista.svg``) and a tagline on top. Text is drawn
     by VTK's built-in Arial font for a cleaner look than PIL's bundled fonts.
     """
-    mesh = examples.download_nefertiti()
-    mesh.rotate_x(-90.0, inplace=True)
-    cubemap = examples.download_sky_box_cube_map()
+    mesh = examples.download_aero_bracket().rotate_x(90)
 
     plotter = pv.Plotter(off_screen=True, window_size=OG_WINDOW_SIZE)
     # Matches the light-mode site background (``--surface-soft`` with a tint
     # of ``--accent-soft`` mixed in) so the card blends with the landing page.
     plotter.set_background('#f4f6fa')
     plotter.enable_anti_aliasing('msaa')
-    plotter.set_environment_texture(cubemap)
     plotter.add_mesh(
         mesh,
-        color='salmon',
-        pbr=True,
-        metallic=0.8,
-        roughness=0.1,
-        diffuse=1.0,
+        scalars='von Mises stress',
+        cmap='cividis',
+        ambient=0.2,
+        specular=0.08,
+        smooth_shading=True,
         show_scalar_bar=False,
     )
     plotter.camera_position = pv.CameraPosition(
-        position=(-313.40, 66.09, 1000.61),
-        focal_point=(0.0, 0.0, 0.0),
-        viewup=(0.018, 0.99, -0.06),
+        position=(-0.07231869607498097, -0.1733062294330635, 0.14708040091362376),
+        focal_point=(0.05245100031606853, 0.0, 0.026985044591128826),
+        viewup=(0.2864001724005046, 0.3978124129768371, 0.8716193121601354),
     )
+    plotter.camera.zoom(1.2)
     # Shift the projection so the subject sits in the right portion of the
     # canvas, leaving the left clear for the wordmark and tagline. Negative
     # x on ``SetWindowCenter`` translates the image to the right.
-    plotter.camera.SetWindowCenter(-0.55, 0.0)
-    plotter.camera.zoom(1.05)
+    plotter.camera.SetWindowCenter(-0.45, -0.05)
 
     # VTK text coords are pixels from the bottom-left corner.
     # VTK text coords are pixels from the bottom-left corner. The PyVista SVG
