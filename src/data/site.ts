@@ -181,7 +181,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     href: 'https://github.com/pyvista/pymeshfix',
     secondaryHref: 'https://pymeshfix.pyvista.org/',
     secondaryLabel: 'Docs',
-    badge: 'Official project',
+    badge: 'Official',
     kind: 'official',
     description:
       'Repair damaged or non-watertight surface meshes before handing them off to PyVista for analysis and visualization.',
@@ -189,7 +189,7 @@ export const ecosystemProjects: EcosystemProject[] = [
   {
     name: 'pytest-pyvista',
     href: 'https://github.com/pyvista/pytest-pyvista',
-    badge: 'Official project',
+    badge: 'Official',
     kind: 'official',
     description:
       'A pytest plugin for image-based regression testing of PyVista plots in visualization-heavy projects.',
@@ -197,7 +197,7 @@ export const ecosystemProjects: EcosystemProject[] = [
   {
     name: 'pyvista-zstd',
     href: 'https://github.com/pyvista/pyvista-zstd',
-    badge: 'Official project',
+    badge: 'Official',
     kind: 'official',
     description:
       'Zstandard compression for PyVista datasets that keeps large geometries light to store and move.',
@@ -205,30 +205,59 @@ export const ecosystemProjects: EcosystemProject[] = [
   {
     name: 'scikit-gmsh',
     href: 'https://github.com/pyvista/scikit-gmsh',
-    badge: 'Official project',
+    badge: 'Official',
     kind: 'official',
     description:
       'Mesh generation with Gmsh that hands off directly to PyVista for inspection and visualization.',
   },
   {
-    name: 'torch-points3d',
-    href: 'https://github.com/torch-points3d/torch-points3d',
-    secondaryHref: 'https://torch-points3d.readthedocs.io/en/latest/',
+    name: 'GemPy',
+    href: 'https://github.com/gempy-project/gempy',
+    secondaryHref: 'https://www.gempy.org/',
     secondaryLabel: 'Docs',
-    badge: 'Community project',
+    badge: 'Community',
     kind: 'community',
-    description:
-      'Deep learning on point clouds and unstructured 3D data, with PyVista for inspection and visualization.',
+    description: '3D structural geological modeling, with PyVista for interactive visualization.',
   },
   {
     name: 'MNE-Python',
     href: 'https://github.com/mne-tools/mne-python',
     secondaryHref: 'https://mne.tools/stable/',
     secondaryLabel: 'Docs',
-    badge: 'Community project',
+    badge: 'Community',
     kind: 'community',
     description:
       'A neuroscience toolkit for MEG and EEG, with PyVista for 3D visualization of brain activity.',
+  },
+  {
+    name: 'FEniCSx',
+    href: 'https://github.com/FEniCS/dolfinx',
+    secondaryHref: 'https://fenicsproject.org/',
+    secondaryLabel: 'Docs',
+    badge: 'Community',
+    kind: 'community',
+    description:
+      'Finite-element solver for partial differential equations, with PyVista for mesh and solution plotting.',
+  },
+  {
+    name: 'AeroSandbox',
+    href: 'https://github.com/peterdsharpe/AeroSandbox',
+    secondaryHref: 'https://aerosandbox.readthedocs.io/',
+    secondaryLabel: 'Docs',
+    badge: 'Community',
+    kind: 'community',
+    description:
+      'Aircraft design and aerodynamic optimization, with PyVista for 3D geometry views.',
+  },
+  {
+    name: 'PyMAPDL',
+    href: 'https://github.com/ansys/pymapdl',
+    secondaryHref: 'https://mapdl.docs.pyansys.com/',
+    secondaryLabel: 'Docs',
+    badge: 'Community',
+    kind: 'community',
+    description:
+      'Pythonic interface to Ansys MAPDL, with PyVista for 3D plotting of finite-element results.',
   },
 ];
 
