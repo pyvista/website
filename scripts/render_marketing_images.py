@@ -364,6 +364,74 @@ def render_cfd_data(theme: RenderTheme) -> None:
     print(f'Saved {output_path.relative_to(ROOT)}')
 
 
+def render_kitchen_airflow(theme: RenderTheme) -> None:
+    """Render a kitchen CFD scene: furniture geometry plus streamtubes.
+
+    Mirrors the snippet shown on the website. The kitchen dataset provides a
+    structured grid with a velocity field; the ``split=True`` variant returns
+    the furniture meshes as a separate ``MultiBlock`` so the two datasets can
+    be composed as clearly distinct elements in the same scene.
+    """
+    mesh = examples.download_kitchen()
+    furniture = examples.download_kitchen(split=True)
+    source = pv.Line((0.08, 2.5, 0.71), (0.08, 4.5, 0.71), resolution=15)
+    streamlines = mesh.streamlines_from_source(source, max_length=200)
+
+    furniture_color = '#6b7583' if theme.name == 'dark' else '#b4bdc9'
+    tube_cmap = 'plasma' if theme.name == 'dark' else 'viridis'
+
+    plotter = new_plotter(background=theme.surface_background)
+    plotter.add_mesh(
+        furniture,
+        color=furniture_color,
+        ambient=0.2,
+        specular=0.08,
+        smooth_shading=True,
+    )
+    plotter.add_mesh(
+        streamlines.tube(radius=0.02),
+        cmap=tube_cmap,
+        smooth_shading=True,
+        ambient=0.2,
+        specular=0.1,
+        show_scalar_bar=False,
+    )
+    # Look from the (-x, -y, +z) corner toward the scene center.
+    xmin, xmax, ymin, ymax, zmin, zmax = plotter.bounds
+    center = (0.5 * (xmin + xmax), 0.5 * (ymin + ymax), 0.5 * (zmin + zmax))
+    extent = max(xmax - xmin, ymax - ymin, zmax - zmin)
+    plotter.camera_position = [
+        (center[0] - extent, center[1] - extent, center[2] + extent),
+        center,
+        (0, 0, 1),
+    ]
+    plotter.camera.zoom(0.85)
+    save_screenshot(plotter, 'example-kitchen-airflow', theme)
+
+
+def render_bunny_comparison(theme: RenderTheme) -> None:
+    """Render the Stanford bunny shown in the side-by-side comparison tab."""
+    mesh = examples.download_bunny()
+    color = 'salmon' if theme.name == 'dark' else 'linen'
+
+    plotter = new_plotter(background=theme.surface_background)
+    plotter.add_mesh(
+        mesh,
+        color=color,
+        smooth_shading=True,
+        split_sharp_edges=True,
+        ambient=0.18,
+        specular=0.08,
+    )
+    plotter.camera_position = pv.CameraPosition(
+        position=(0.14826, 0.275729, 0.4215911),
+        focal_point=(-0.01684, 0.110154, -0.0015369),
+        viewup=(-0.15446, 0.939031, -0.3071841),
+    )
+    plotter.camera.zoom(1.25)
+    save_screenshot(plotter, 'example-bunny', theme)
+
+
 def _rasterize_svg(path: Path, *, width: int) -> Image.Image:
     """Rasterize an SVG file to a transparent PIL image at the given width."""
     png_bytes = cairosvg.svg2png(url=str(path), output_width=width)
@@ -461,6 +529,8 @@ RENDERERS = (
     render_pump_bracket,
     render_aero_bracket,
     render_cfd_data,
+    render_kitchen_airflow,
+    render_bunny_comparison,
 )
 
 

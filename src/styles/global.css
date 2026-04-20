@@ -54,6 +54,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   font-size: 80%;
 }
 
@@ -118,6 +119,10 @@ main {
   backdrop-filter: blur(18px);
 }
 
+main > .section-tinted:last-child {
+  border-bottom: none;
+}
+
 .section-header {
   max-width: none;
   margin-bottom: 2rem;
@@ -155,7 +160,7 @@ main {
 }
 
 .section-header p {
-  max-width: 80ch;
+  max-width: none;
 }
 
 .section-eyebrow,
@@ -313,6 +318,21 @@ main {
   cursor: pointer;
 }
 
+.copy-button--with-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: auto;
+  height: 2.3rem;
+  padding: 0 0.85rem;
+}
+
+.copy-button-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 .copy-icon {
   width: 0.95rem;
   height: 0.95rem;
@@ -354,15 +374,11 @@ main {
   gap: 1.25rem;
 }
 
-.hero-topline {
-  min-width: 0;
-}
-
 .hero-topcards {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.75fr);
   gap: 1rem;
-  align-items: stretch;
+  align-items: center;
 }
 
 .hero-head {
@@ -384,21 +400,8 @@ main {
 
 .hero-mission {
   max-width: none;
-  margin: 0;
+  margin: 1rem 0 0;
   font-size: 1.28rem;
-}
-
-.hero-mission-card {
-  padding: 1rem 1.15rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
-  border-left: 4px solid var(--accent);
-  border-radius: 1.15rem;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-soft) 44%, var(--surface-strong)),
-    var(--surface-strong)
-  );
-  box-shadow: var(--shadow);
 }
 
 .hero-actions-row {
@@ -578,7 +581,6 @@ main {
 
 .section-header-trust-text p {
   margin: 0.6rem 0 0;
-  max-width: 80ch;
 }
 
 .panel-topline,
@@ -590,10 +592,16 @@ main {
   margin-bottom: 0.9rem;
 }
 
-.panel-topline span {
+.panel-topline > span {
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 700;
+}
+
+.panel-topline-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .code-block :global(pre.shiki) {
@@ -734,7 +742,7 @@ main {
 .content-card h3,
 .footer-links strong {
   margin: 0;
-  font-size: 1.16rem;
+  font-size: 0.98rem;
 }
 
 .accent-card {
@@ -796,7 +804,68 @@ main {
 .example-top-grid .feature-visual {
   aspect-ratio: 3 / 2;
   min-height: 0;
-  margin-top: 4.6rem;
+  margin-top: 0;
+}
+
+.example-tabs {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+.example-tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.1rem;
+}
+
+.example-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 0.7rem 0.7rem 0 0;
+  padding: 0.55rem 1.05rem;
+  margin-bottom: -1px;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.example-tab:hover {
+  color: var(--text);
+}
+
+.example-tab[aria-selected='true'] {
+  color: var(--text);
+  background: var(--surface-strong);
+  border-color: var(--border);
+}
+
+.example-comparison-caption {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  max-width: 80ch;
+  text-wrap: pretty;
+}
+
+.example-comparison-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.example-comparison-pyvista {
+  display: grid;
+  gap: 1rem;
+}
+
+.example-comparison-pyvista .feature-visual {
+  aspect-ratio: 3 / 2;
 }
 
 .example-gallery-grid .feature-visual {
@@ -857,25 +926,111 @@ main {
   margin-bottom: 1rem;
 }
 
+.citation-stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  margin: 0.5rem 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 1rem;
+  background: var(--surface-strong);
+}
+
+.citation-stat-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.citation-stat-number {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.citation-stat-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.citation-stat-source {
+  margin-left: auto;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.citation-highlights {
+  margin: 1.5rem 0 1.75rem;
+}
+
+.citation-highlights h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.citation-highlights ul {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citation-highlights li {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--surface-strong);
+}
+
+.citation-highlights li a {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+.citation-highlights li a:hover {
+  color: var(--accent);
+}
+
+.citation-highlights li p {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
 .site-footer {
-  padding: 4rem 0 4.5rem;
+  padding: 4.5rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface-soft);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  gap: 2rem;
-  padding: 2rem;
-  border: 1px solid var(--border);
-  border-radius: 2rem;
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  gap: 1.5rem;
   backdrop-filter: blur(18px);
 }
 
 .footer-intro {
   display: grid;
-  gap: 1rem;
+  gap: 0.6rem;
+}
+
+.footer-intro p {
+  margin: 0;
 }
 
 .footer-contact {
@@ -899,23 +1054,22 @@ main {
 }
 
 .footer-logo {
-  width: min(24rem, 80vw);
+  width: min(14rem, 60vw);
   height: auto;
 }
 
 .footer-links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 .footer-links a {
   display: grid;
-  gap: 0.2rem;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: var(--surface-strong);
+  gap: 0.15rem;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
 .footer-links span {
@@ -941,6 +1095,7 @@ main {
   .section-header-trust,
   .section-split,
   .example-gallery-grid,
+  .example-comparison-grid,
   .feature-grid,
   .resource-card-grid,
   .ecosystem-grid,

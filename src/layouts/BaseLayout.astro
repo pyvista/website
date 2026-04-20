@@ -31,7 +31,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="PyVista — 3D plotting & analysis made easy" />
+    <meta property="og:image:alt" content="PyVista: 3D plotting & analysis made easy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -73,6 +73,41 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
       const media = window.matchMedia('(prefers-color-scheme: dark)');
       media.addEventListener('change', (event) => {
         applyTheme(event.matches ? 'dark' : 'light');
+      });
+
+      document.querySelectorAll('[data-example-tabs]').forEach((container) => {
+        const tabs = container.querySelectorAll('[role="tab"][data-tab]');
+        const panels = container.querySelectorAll('[role="tabpanel"][data-tab]');
+        const activate = (name) => {
+          tabs.forEach((tab) => {
+            tab.setAttribute(
+              'aria-selected',
+              tab.getAttribute('data-tab') === name ? 'true' : 'false',
+            );
+          });
+          panels.forEach((panel) => {
+            if (panel.getAttribute('data-tab') === name) {
+              panel.removeAttribute('hidden');
+            } else {
+              panel.setAttribute('hidden', '');
+            }
+          });
+        };
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            activate(tab.getAttribute('data-tab'));
+          });
+          tab.addEventListener('keydown', (event) => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            const list = Array.from(tabs);
+            const current = list.indexOf(tab);
+            const delta = event.key === 'ArrowRight' ? 1 : -1;
+            const next = list[(current + delta + list.length) % list.length];
+            next.focus();
+            activate(next.getAttribute('data-tab'));
+          });
+        });
       });
 
       document.querySelectorAll('[data-copy]').forEach((button) => {

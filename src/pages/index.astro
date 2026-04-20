@@ -10,6 +10,8 @@ import {
   exampleGallery,
   ecosystemProjects,
   exampleSpotlight,
+  kitchenSpotlight,
+  bunnySpotlight,
   featureCards,
   hero,
   heroScreenshots,
@@ -18,15 +20,60 @@ import {
   trustBadges,
 } from '../data/site';
 
-const exampleCommand = `from pyvista import examples
+const basicSnippet = `import pyvista as pv
+from pyvista import examples
 
+# or pv.read('path/to/mesh.obj')
 mesh = examples.download_aero_bracket()
 mesh.plot()`;
 
-const exampleHtml = await codeToHtml(exampleCommand, {
-  lang: 'python',
-  theme: 'github-dark',
-});
+const kitchenSnippet = `import pyvista as pv
+from pyvista import examples
+
+# Kitchen CFD simulation: grid with a velocity field
+# and furniture meshes as a separate dataset
+mesh = examples.download_kitchen()
+furniture = examples.download_kitchen(split=True)
+
+# Trace streamlines from above the stove
+source = pv.Line((0.08, 2.5, 0.71), (0.08, 4.5, 0.71), resolution=15)
+streamlines = mesh.streamlines_from_source(source, max_length=200)
+
+# Compose the scene
+pl = pv.Plotter()
+pl.add_mesh(furniture, color='slategray')
+pl.add_mesh(streamlines.tube(radius=0.02))
+pl.show()`;
+
+const vtkSnippet = `import vtk
+
+reader = vtk.vtkSTLReader()
+reader.SetFileName('bunny.stl')
+mapper = vtk.vtkDataSetMapper()
+mapper.SetInputConnection(reader.GetOutputPort())
+actor = vtk.vtkActor()
+actor.SetMapper(mapper)
+ren = vtk.vtkRenderer()
+ren.AddActor(actor)
+renWin = vtk.vtkRenderWindow()
+renWin.AddRenderer(ren)
+iren = vtk.vtkRenderWindowInteractor()
+iren.SetRenderWindow(renWin)
+iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+iren.Initialize()
+renWin.Render()
+iren.Start()`;
+
+const pyvistaSnippet = `import pyvista as pv
+
+mesh = pv.read('bunny.stl')
+mesh.plot()`;
+
+const shikiOpts = { lang: 'python', theme: 'github-dark' } as const;
+const basicHtml = await codeToHtml(basicSnippet, shikiOpts);
+const kitchenHtml = await codeToHtml(kitchenSnippet, shikiOpts);
+const vtkHtml = await codeToHtml(vtkSnippet, shikiOpts);
+const pyvistaHtml = await codeToHtml(pyvistaSnippet, shikiOpts);
 
 type Contributor = {
   login: string;
@@ -58,26 +105,96 @@ try {
 } catch (error) {
   console.warn('Failed to fetch contributors:', error);
 }
+
+type CitingWork = {
+  id: string;
+  doi: string | null;
+  display_name: string;
+  publication_year: number;
+  cited_by_count: number;
+  authorships: { author: { display_name: string } }[];
+  primary_location?: { source?: { display_name?: string } | null } | null;
+};
+
+const OPENALEX_WORK_ID = 'W2945475836';
+const OPENALEX_UA = 'pyvista-website-build (mailto:info@pyvista.org)';
+let citationCount: number | null = null;
+let topCitations: CitingWork[] = [];
+try {
+  const workResponse = await fetch(`https://api.openalex.org/works/${OPENALEX_WORK_ID}`, {
+    headers: { 'User-Agent': OPENALEX_UA },
+  });
+  if (workResponse.ok) {
+    const payload = (await workResponse.json()) as { cited_by_count: number };
+    citationCount = payload.cited_by_count;
+  } else {
+    console.warn(`OpenAlex work API returned ${workResponse.status}`);
+  }
+
+  const citingUrl = new URL('https://api.openalex.org/works');
+  citingUrl.searchParams.set('filter', `cites:${OPENALEX_WORK_ID}`);
+  citingUrl.searchParams.set('per-page', '5');
+  citingUrl.searchParams.set('sort', 'cited_by_count:desc');
+  citingUrl.searchParams.set(
+    'select',
+    'id,doi,display_name,publication_year,cited_by_count,authorships,primary_location',
+  );
+  const citingResponse = await fetch(citingUrl.toString(), {
+    headers: { 'User-Agent': OPENALEX_UA },
+  });
+  if (citingResponse.ok) {
+    const payload = (await citingResponse.json()) as { results: CitingWork[] };
+    topCitations = payload.results;
+  } else {
+    console.warn(`OpenAlex citing API returned ${citingResponse.status}`);
+  }
+} catch (error) {
+  console.warn('Failed to fetch OpenAlex data:', error);
+}
+
+// Keep the "Python 3.10+" badge in sync with the live pyproject requirement on
+// PyPI so it never drifts out of date when the minimum supported version
+// changes in a release.
+let pythonMinVersion = '3.10';
+try {
+  const response = await fetch('https://pypi.org/pypi/pyvista/json');
+  if (response.ok) {
+    const payload = (await response.json()) as { info: { requires_python?: string } };
+    const match = payload.info.requires_python?.match(/(\d+\.\d+)/);
+    if (match) pythonMinVersion = match[1];
+  } else {
+    console.warn(`PyPI API returned ${response.status}`);
+  }
+} catch (error) {
+  console.warn('Failed to fetch PyPI metadata:', error);
+}
+
+const resolvedTrustBadges = trustBadges.map((badge) =>
+  badge.id === 'python' ? { ...badge, label: `Python ${pythonMinVersion}+` } : badge,
+);
+
+const formatAuthors = (authorships: CitingWork['authorships']) => {
+  const names = authorships
+    .map((a) => a.author?.display_name)
+    .filter((n): n is string => Boolean(n))
+    .slice(0, 3);
+  if (authorships.length > names.length) names.push('et al.');
+  return names.join(', ');
+};
 ---
 
 <BaseLayout>
   <main id="content">
     <section class="hero section section-tinted" id="top">
       <div class="container hero-shell">
-        <div class="hero-topline">
+        <div class="hero-topcards">
           <div class="hero-head">
             <h1>
               {hero.title}
               <em>{hero.titleEmphasis}</em>
             </h1>
-          </div>
-        </div>
-
-        <div class="hero-topcards">
-          <article class="hero-mission-card">
-            <p class="section-eyebrow">Mission</p>
             <p class="hero-mission">{hero.mission}</p>
-          </article>
+          </div>
 
           <div class="install-strip">
             <div class="install-inline">
@@ -144,7 +261,7 @@ try {
 
             <div class="badge-list">
               {
-                trustBadges.map((item) => (
+                resolvedTrustBadges.map((item) => (
                   <a class="badge-link" href={item.href}>
                     {item.label}
                   </a>
@@ -177,11 +294,11 @@ try {
       <div class="container">
         <div class="section-header section-header-trust">
           <div class="section-header-trust-text">
-            <h2>A professional foundation for modern 3D workflows.</h2>
+            <h2>The 3D library that fits in with the rest of your Python stack.</h2>
             <p>
-              PyVista gives teams a dependable 3D layer for modern Python workflows, with
-              array-native data exchange, direct memory sharing where possible, and clean
-              interoperability across the scientific Python ecosystem.
+              PyVista brings 3D data, mesh analysis, and plotting into the same idiom as NumPy,
+              pandas, and xarray. Array-native datasets, direct memory sharing where possible, and
+              an interface that reads the way your research code already does.
             </p>
           </div>
           <a class="numfocus-lockup numfocus-lockup-inline" href={numfocus.href}>
@@ -206,33 +323,125 @@ try {
 
     <section class="section section-tinted" id="example">
       <div class="container">
-        <div class="section-split example-top-grid">
-          <div>
-            <SectionHeader
-              eyebrow="Example spotlight"
-              title="A small Python snippet that still feels production-ready."
-              intro="PyVista can turn a concise script into a polished engineering visualization. This snippet uses the built-in aero bracket dataset and shows the resulting plot beside the code."
-            />
+        <SectionHeader
+          eyebrow="Example"
+          title="Declarative 3D in Python."
+          intro="Describe what you want to see and PyVista builds the scene, manages GPU resources, and cleans up when the window closes."
+        />
 
-            <article class="code-panel example-panel">
-              <div class="panel-topline">
-                <span>Python example</span>
-                <CopyButton value={exampleCommand} />
-              </div>
-              <div class="code-block" set:html={exampleHtml} />
-            </article>
+        <div class="example-tabs" data-example-tabs>
+          <div class="example-tab-list" role="tablist" aria-label="Example snippets">
+            <button
+              class="example-tab"
+              type="button"
+              role="tab"
+              data-tab="basic"
+              aria-selected="true"
+            >
+              Basic
+            </button>
+            <button
+              class="example-tab"
+              type="button"
+              role="tab"
+              data-tab="kitchen"
+              aria-selected="false"
+            >
+              Kitchen airflow
+            </button>
+            <button
+              class="example-tab"
+              type="button"
+              role="tab"
+              data-tab="comparison"
+              aria-selected="false"
+            >
+              Comparison
+            </button>
           </div>
 
-          <figure class="feature-visual">
-            <a class="visual-link" href={exampleSpotlight.href}>
-              <ThemeImage
-                image={exampleSpotlight.image}
-                alt={exampleSpotlight.alt}
-                loading="lazy"
-              />
-              <figcaption>{exampleSpotlight.label}</figcaption>
-            </a>
-          </figure>
+          <div class="example-tab-panel" role="tabpanel" data-tab="basic">
+            <div class="section-split example-top-grid">
+              <article class="code-panel example-panel">
+                <div class="panel-topline">
+                  <span>Python</span>
+                  <CopyButton value={basicSnippet} />
+                </div>
+                <div class="code-block" set:html={basicHtml} />
+              </article>
+
+              <figure class="feature-visual">
+                <a class="visual-link" href={exampleSpotlight.href}>
+                  <ThemeImage
+                    image={exampleSpotlight.image}
+                    alt={exampleSpotlight.alt}
+                    loading="lazy"
+                  />
+                  <figcaption>{exampleSpotlight.label}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+
+          <div class="example-tab-panel" role="tabpanel" data-tab="kitchen" hidden>
+            <div class="section-split example-top-grid">
+              <article class="code-panel example-panel">
+                <div class="panel-topline">
+                  <span>Python</span>
+                  <CopyButton value={kitchenSnippet} />
+                </div>
+                <div class="code-block" set:html={kitchenHtml} />
+              </article>
+
+              <figure class="feature-visual">
+                <a class="visual-link" href={kitchenSpotlight.href}>
+                  <ThemeImage
+                    image={kitchenSpotlight.image}
+                    alt={kitchenSpotlight.alt}
+                    loading="lazy"
+                  />
+                  <figcaption>{kitchenSpotlight.label}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+
+          <div class="example-tab-panel" role="tabpanel" data-tab="comparison" hidden>
+            <p class="example-comparison-caption">
+              Reading and plotting an STL file in low-level Python graphics code versus PyVista.
+              Same result, a fraction of the work.
+            </p>
+            <div class="example-comparison-grid">
+              <article class="code-panel example-panel">
+                <div class="panel-topline">
+                  <span>Low-level graphics code</span>
+                  <CopyButton value={vtkSnippet} />
+                </div>
+                <div class="code-block" set:html={vtkHtml} />
+              </article>
+
+              <div class="example-comparison-pyvista">
+                <article class="code-panel example-panel">
+                  <div class="panel-topline">
+                    <span>PyVista</span>
+                    <CopyButton value={pyvistaSnippet} />
+                  </div>
+                  <div class="code-block" set:html={pyvistaHtml} />
+                </article>
+
+                <figure class="feature-visual">
+                  <a class="visual-link" href={bunnySpotlight.href}>
+                    <ThemeImage
+                      image={bunnySpotlight.image}
+                      alt={bunnySpotlight.alt}
+                      loading="lazy"
+                    />
+                    <figcaption>{bunnySpotlight.label}</figcaption>
+                  </a>
+                </figure>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -241,8 +450,8 @@ try {
       <div class="container">
         <SectionHeader
           eyebrow="Explore PyVista"
-          title="Start with the docs, examples, and API guides."
-          intro="The documentation is the best place to start, whether you are installing PyVista for the first time, browsing examples, or moving deeper into the API and related projects."
+          title="The docs are the best place to go deeper."
+          intro="Whether you're installing PyVista for the first time, browsing the gallery, or reaching for an API reference, the documentation has what you need."
         />
 
         <div class="card-grid resource-card-grid">
@@ -278,8 +487,8 @@ try {
       <div class="container">
         <SectionHeader
           eyebrow="Ecosystem"
-          title="PyVista is the foundation for a growing ecosystem."
-          intro="Official and community projects alike continue to extend PyVista into mesh repair, meshing, testing, desktop tooling, and production workflows."
+          title="Projects built on PyVista."
+          intro="Official projects extend PyVista with mesh repair, meshing, testing, and compression. Community projects build on it for neuroscience, deep learning on point clouds, geosciences, CFD, and more."
         />
 
         <div class="card-grid ecosystem-grid">
@@ -323,8 +532,8 @@ try {
           <div class="container">
             <SectionHeader
               eyebrow="Contributors"
-              title="Built by a global community."
-              intro="PyVista is developed and maintained by contributors from all backgrounds. Thank you to everyone who has helped shape the project."
+              title="Built in the open by a global community."
+              intro="PyVista is developed and maintained by contributors from around the world. Thanks to everyone who has helped shape the project."
             />
             <ul class="contributor-grid" aria-label="PyVista contributors">
               {contributors.map((c) => (
@@ -332,7 +541,7 @@ try {
                   <a
                     class="contributor-link"
                     href={c.html_url}
-                    title={`${c.login} — ${c.contributions} contributions`}
+                    title={`${c.login} · ${c.contributions} contributions`}
                     aria-label={c.login}
                   >
                     <img
@@ -362,31 +571,65 @@ try {
     <section class="section section-tinted" id="citation">
       <div class="container citation-section">
         <SectionHeader
-          eyebrow="Cite PyVista"
-          title="Published, citable, and easy to reference."
-          intro="If PyVista supports your research, please help our scientific visibility by citing our work."
+          eyebrow="Cite & publications"
+          title="Cited across the sciences."
+          intro="PyVista shows up in published research across aerospace, geoscience, neuroscience, electrical engineering, and more. If it helps your work, please cite the JOSS paper so the project stays visible in the scientific record."
         />
+
+        {
+          citationCount !== null && (
+            <div class="citation-stat">
+              <div class="citation-stat-figure">
+                <span class="citation-stat-number">{citationCount.toLocaleString()}</span>
+                <span class="citation-stat-label">papers cite PyVista</span>
+              </div>
+              <a
+                class="citation-stat-source"
+                href={`https://openalex.org/works/${OPENALEX_WORK_ID}`}
+              >
+                Live count from OpenAlex
+              </a>
+            </div>
+          )
+        }
 
         <div class="citation-actions">
           <a class="button button-primary" href={citation.paper}>View the JOSS paper</a>
           <a class="button button-secondary" href={citation.doi}>Open DOI</a>
         </div>
 
+        {
+          topCitations.length > 0 && (
+            <div class="citation-highlights">
+              <h3>A few papers built on PyVista</h3>
+              <ul>
+                {topCitations.map((work) => {
+                  const href = work.doi ?? work.id;
+                  const venue = work.primary_location?.source?.display_name ?? 'Preprint';
+                  return (
+                    <li>
+                      <a href={href}>{work.display_name}</a>
+                      <p>
+                        {formatAuthors(work.authorships)} · {venue} · {work.publication_year}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )
+        }
+
         <div class="citation-stack">
           <article class="code-panel">
             <div class="panel-topline">
-              <span>Plain text citation</span>
-              <CopyButton value={citation.text} />
+              <span>Citation</span>
+              <div class="panel-topline-actions">
+                <CopyButton value={citation.text} label="Copy text" showLabel />
+                <CopyButton value={citation.bibtex} label="Copy BibTeX" showLabel />
+              </div>
             </div>
             <pre class="plain-block"><code>{citation.text}</code></pre>
-          </article>
-
-          <article class="code-panel">
-            <div class="panel-topline">
-              <span>BibTeX</span>
-              <CopyButton value={citation.bibtex} />
-            </div>
-            <pre class="plain-block"><code>{citation.bibtex}</code></pre>
           </article>
         </div>
       </div>

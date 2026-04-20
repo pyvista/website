@@ -23,22 +23,21 @@ export interface EcosystemProject {
 export const siteMeta = {
   title: 'PyVista | 3D plotting & analysis made easy',
   description:
-    'PyVista is a Pythonic interface to VTK for 3D plotting, mesh analysis, and scientific visualization across research and engineering workflows.',
+    'PyVista is a Python library for 3D visualization and mesh analysis that works naturally with NumPy, pandas, xarray, and the rest of the scientific Python ecosystem.',
 };
 
 export const navLinks = [
   { href: '#why-pyvista', label: 'Why PyVista' },
   { href: '#example', label: 'Example' },
   { href: '#ecosystem', label: 'Ecosystem' },
-  { href: '#citation', label: 'Cite' },
+  { href: '#citation', label: 'Publications' },
 ];
 
 export const hero = {
   mission:
-    'Our goal is to make 3D visualization and analysis approachable to domain scientists so they can focus on the research questions at hand, not the nuances of 3D graphics and processing.',
+    'Make 3D analysis and visualization feel like the rest of scientific Python, so you can focus on the research instead of wrangling spatial data structures and 3D rendering.',
   title: '3D plotting & analysis made',
   titleEmphasis: 'easy.',
-  body: 'PyVista is Pythonic VTK: a high-level API for spatial datasets, mesh analysis, and 3D plotting that helps teams move from exploratory notebooks to polished applications without leaving the scientific Python ecosystem.',
   installCommand: "pip install 'pyvista[all]'",
 };
 
@@ -70,6 +69,20 @@ export const exampleSpotlight = {
   href: 'https://docs.pyvista.org/api/examples/_autosummary/pyvista.examples.downloads.download_aero_bracket.html',
 };
 
+export const kitchenSpotlight = {
+  image: themedImage('example-kitchen-airflow'),
+  alt: 'Kitchen CFD scene with furniture geometry and streamtubes colored by velocity',
+  label: 'Kitchen airflow: furniture + streamtubes',
+  href: 'https://docs.pyvista.org/api/examples/_autosummary/pyvista.examples.downloads.download_kitchen.html',
+};
+
+export const bunnySpotlight = {
+  image: themedImage('example-bunny'),
+  alt: 'Stanford bunny STL rendered with PyVista',
+  label: 'bunny.stl rendered with mesh.plot()',
+  href: 'https://docs.pyvista.org/getting-started/why.html',
+};
+
 export const exampleGallery = [
   {
     image: themedImage('example-pump-bracket', 'gif'),
@@ -85,16 +98,25 @@ export const exampleGallery = [
   },
 ];
 
-export const trustBadges = [
+export interface TrustBadge {
+  id: string;
+  label: string;
+  href: string;
+}
+
+export const trustBadges: TrustBadge[] = [
   {
+    id: 'python',
     label: 'Python 3.10+',
     href: 'https://pypi.org/project/pyvista/',
   },
   {
+    id: 'license',
     label: 'MIT License',
     href: 'https://github.com/pyvista/pyvista/blob/main/LICENSE',
   },
   {
+    id: 'joss',
     label: 'Published in JOSS',
     href: 'https://doi.org/10.21105/joss.01450',
   },
@@ -109,18 +131,18 @@ export const numfocus = {
 export const featureCards = [
   {
     eyebrow: 'Scientific Python interop',
-    title: 'Fits naturally into modern array-based workflows.',
-    body: 'PyVista works naturally with NumPy-style data, supports direct memory sharing where possible, and integrates cleanly with the broader scientific Python stack.',
+    title: 'Mesh data that acts like NumPy data.',
+    body: "PyVista's dataset classes expose points, cells, and attached fields as NumPy arrays, often sharing memory with the underlying object. Hand them to pandas, xarray, scikit-image, or SciPy and keep the same objects through analysis, transformation, and plotting.",
   },
   {
-    eyebrow: 'Mesh-first workflows',
-    title: 'Built for spatial datasets and large geometries.',
-    body: 'Work directly with surfaces, volumes, finite element meshes, and point clouds using tools designed for practical research and engineering analysis.',
+    eyebrow: 'More than plotting',
+    title: 'Write research code, not graphics code.',
+    body: 'Threshold, slice, warp, contour, clip, decimate, interpolate, and run boolean operations with one-line methods on the dataset. Chain them together, inspect intermediate results, and drop the output back into NumPy or pandas when you are done.',
   },
   {
-    eyebrow: 'From notebooks to products',
-    title: 'The same library scales across contexts.',
-    body: 'Use PyVista in Jupyter, web apps, desktop tools, regression tests, documentation, and more with one consistent Python API across each context.',
+    eyebrow: 'From notebooks to applications',
+    title: 'One library, the whole journey.',
+    body: 'The same code runs in Jupyter for exploration, on the server behind a trame or Panel web app, inside a PyQt desktop tool, and in CI as an image regression test. No rewrites when the use case grows.',
   },
 ];
 
@@ -128,29 +150,27 @@ export const resourceCards = [
   {
     title: 'Tutorial',
     href: 'https://tutorial.pyvista.org/',
-    description:
-      'Start with the PyVista tutorial for a guided, practical introduction that walks through core workflows step by step.',
+    description: "A guided introduction that walks through PyVista's core workflows.",
     cta: 'Start the tutorial',
   },
   {
     title: 'Documentation',
     href: 'https://docs.pyvista.org/',
     description:
-      'Use the main docs for installation, how-to guides, the API reference, and the full project documentation.',
+      'Installation, how-to guides, the API reference, and the full project documentation.',
     cta: 'Read the docs',
   },
   {
     title: 'Examples gallery',
     href: 'https://docs.pyvista.org/examples/',
     description:
-      'Browse PyVista examples covering plotting, filters, widgets, volume rendering, meshing, and more.',
+      'Runnable examples across plotting, filters, widgets, volume rendering, and meshing.',
     cta: 'Browse examples',
   },
   {
     title: 'API reference',
     href: 'https://docs.pyvista.org/api/',
-    description:
-      'Go straight to the plotting, filtering, dataset, and utility APIs that power PyVista.',
+    description: 'The full plotting, filtering, dataset, and utility API.',
     cta: 'Open the API',
   },
 ];
@@ -164,7 +184,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Official project',
     kind: 'official',
     description:
-      'Python bindings for MeshFix so damaged or non-watertight surface meshes can be repaired before downstream PyVista visualization and analysis.',
+      'Repair damaged or non-watertight surface meshes before handing them off to PyVista for analysis and visualization.',
   },
   {
     name: 'pytest-pyvista',
@@ -172,7 +192,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Official project',
     kind: 'official',
     description:
-      'Regression testing helpers for PyVista plots so visualization-heavy projects can validate outputs with confidence.',
+      'A pytest plugin for image-based regression testing of PyVista plots in visualization-heavy projects.',
   },
   {
     name: 'pyvista-zstd',
@@ -180,7 +200,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Official project',
     kind: 'official',
     description:
-      'Zstandard-based compression for PyVista datasets to make large geometry workflows lighter to store and move.',
+      'Zstandard compression for PyVista datasets that keeps large geometries light to store and move.',
   },
   {
     name: 'scikit-gmsh',
@@ -188,7 +208,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Official project',
     kind: 'official',
     description:
-      'Mesh generation with Gmsh that connects naturally to downstream PyVista visualization and inspection.',
+      'Mesh generation with Gmsh that hands off directly to PyVista for inspection and visualization.',
   },
   {
     name: 'torch-points3d',
@@ -198,7 +218,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Community project',
     kind: 'community',
     description:
-      'A deep learning framework for point clouds and unstructured 3D data that pairs naturally with PyVista for inspection and visualization.',
+      'Deep learning on point clouds and unstructured 3D data, with PyVista for inspection and visualization.',
   },
   {
     name: 'MNE-Python',
@@ -208,7 +228,7 @@ export const ecosystemProjects: EcosystemProject[] = [
     badge: 'Community project',
     kind: 'community',
     description:
-      'Widely used neuroscience tooling that includes PyVista-backed 3D visualization for MEG and EEG workflows.',
+      'A neuroscience toolkit for MEG and EEG, with PyVista for 3D visualization of brain activity.',
   },
 ];
 
@@ -226,12 +246,13 @@ export const communityLinks = [
   {
     title: 'Slack',
     href: 'https://slack.pyvista.org',
-    description: 'Join the PyVista community for real-time conversation.',
+    description: 'Join the PyVista community for real-time chat and collaboration.',
   },
   {
     title: 'Professional support',
     href: 'mailto:support@pyvista.org',
-    description: 'Reach the PyVista network for consulting, support, and collaboration.',
+    description:
+      'Consulting, custom development, and support from PyVista maintainers and partners.',
   },
 ];
 
