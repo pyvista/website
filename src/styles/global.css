@@ -244,6 +244,53 @@ main > .section-tinted:last-child {
   gap: 0.75rem;
 }
 
+.header-install {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.35rem 0.25rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-strong);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .header-install {
+    display: inline-flex;
+  }
+}
+
+.header-install.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.header-install-command {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.header-install-command::before {
+  content: '$';
+  margin-right: 0.4rem;
+  color: color-mix(in srgb, var(--text) 45%, transparent);
+  user-select: none;
+}
+
+.header-install .copy-button {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
 .button,
 .copy-button {
   font: inherit;
@@ -1111,6 +1158,10 @@ main > .section-tinted:last-child {
   .site-nav,
   .header-docs {
     display: none;
+  }
+
+  .header-inner {
+    justify-content: center;
   }
 
   .hero-utility-row,

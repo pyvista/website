@@ -1,5 +1,6 @@
 ---
-import { navLinks } from '../data/site';
+import { hero, navLinks } from '../data/site';
+import CopyButton from './CopyButton.astro';
 ---
 
 <header class="site-header">
@@ -11,6 +12,11 @@ import { navLinks } from '../data/site';
     <nav class="site-nav" aria-label="Primary">
       {navLinks.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
+
+    <div class="header-install" data-header-install aria-hidden="true">
+      <code class="header-install-command">{hero.installCommand}</code>
+      <CopyButton value={hero.installCommand} />
+    </div>
 
     <div class="header-actions">
       <a class="button button-secondary header-docs" href="https://docs.pyvista.org/">API Docs</a>

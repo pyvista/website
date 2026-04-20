@@ -75,6 +75,20 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.site).toString();
         applyTheme(event.matches ? 'dark' : 'light');
       });
 
+      const heroInstall = document.querySelector('.hero .install-strip');
+      const headerInstall = document.querySelector('[data-header-install]');
+      if (heroInstall && headerInstall && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const hidden = !entries[0].isIntersecting;
+            headerInstall.classList.toggle('is-visible', hidden);
+            headerInstall.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+          },
+          { rootMargin: '-80px 0px 0px 0px', threshold: 0 },
+        );
+        observer.observe(heroInstall);
+      }
+
       document.querySelectorAll('[data-example-tabs]').forEach((container) => {
         const tabs = container.querySelectorAll('[role="tab"][data-tab]');
         const panels = container.querySelectorAll('[role="tabpanel"][data-tab]');
