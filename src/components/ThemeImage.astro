@@ -5,9 +5,11 @@ interface Props {
   image: ThemedImage;
   alt: string;
   loading?: 'eager' | 'lazy';
+  width?: number;
+  height?: number;
 }
 
-const { image, alt, loading = 'lazy' } = Astro.props;
+const { image, alt, loading = 'lazy', width, height } = Astro.props;
 ---
 
 <img
@@ -17,4 +19,6 @@ const { image, alt, loading = 'lazy' } = Astro.props;
   data-dark-src={image.dark}
   alt={alt}
   loading={loading}
+  width={width}
+  height={height}
 />
