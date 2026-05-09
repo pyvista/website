@@ -142,7 +142,12 @@ export const featureCards = [
   {
     eyebrow: 'From notebooks to applications',
     title: 'One library, the whole journey.',
-    body: 'The same code runs in Jupyter for exploration, on the server behind a trame or Panel web app, inside a PyQt desktop tool, and in CI as an image regression test. No rewrites when the use case grows.',
+    body: 'The same code runs in Jupyter for exploration, on the server behind a web application, inside a PyQt desktop tool, and in CI as an image regression test. No rewrites when the use case grows.',
+  },
+  {
+    eyebrow: 'Built for production',
+    title: 'Stable APIs, tested rendering.',
+    body: 'PyVista is image-regression tested on every commit across the supported matrix of Python and VTK releases. Public APIs follow a deliberate deprecation lifecycle, and rendering behavior is locked under visual regression baselines. Code written today still produces the same picture two years from now.',
   },
 ];
 
