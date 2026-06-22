@@ -128,6 +128,20 @@ export const numfocus = {
   alt: 'NumFOCUS affiliated projects',
 };
 
+export const stewardship = {
+  logo: {
+    light: '/branding/codim-light.png',
+    dark: '/branding/codim-dark.png',
+  },
+  logoAlt: 'CoDimensional',
+  title: 'CoDimensional PBC is PyVista’s commercial steward.',
+  statement: 'Founded by PyVista maintainers, building collaborative 3D on top of the project.',
+  cta: {
+    href: 'https://codimensional.com',
+    label: 'Learn more',
+  },
+};
+
 export const featureCards = [
   {
     eyebrow: 'Scientific Python interop',

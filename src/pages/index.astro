@@ -17,6 +17,7 @@ import {
   heroScreenshots,
   numfocus,
   resourceCards,
+  stewardship,
   trustBadges,
 } from '../data/site';
 
@@ -652,4 +653,18 @@ const formatAuthors = (authorships: CitingWork['authorships']) => {
       </div>
     </section>
   </main>
+
+  <aside class="steward-banner" id="stewardship">
+    <div class="container steward-banner-inner">
+      <ThemeImage image={stewardship.logo} alt={stewardship.logoAlt} width={1280} height={528} />
+      <div class="steward-text">
+        <p class="steward-title">{stewardship.title}</p>
+        <p class="steward-statement">{stewardship.statement}</p>
+      </div>
+      <a class="steward-link" href={stewardship.cta.href}>
+        {stewardship.cta.label}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </aside>
 </BaseLayout>
