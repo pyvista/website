@@ -25,3 +25,6 @@ __pycache__/
 *.pyc
 .venv/
 .ruff_cache/
+
+# Generated from @codimensional/brand by scripts/copy-brand-assets.mjs
+public/branding/codim-*.png
