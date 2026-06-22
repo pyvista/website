@@ -1254,3 +1254,125 @@ main > .section-tinted:last-child {
     grid-template-columns: 1fr;
   }
 }
+
+/* CoDimensional — commercial steward.
+   A slim bar pinned to the bottom of the viewport. CoDim mint is the only
+   accent; the logo swaps light/dark with the site theme. */
+.steward-banner {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 60;
+  border-top: 1px solid var(--border);
+  background: var(--surface-strong);
+  box-shadow: 0 -10px 30px rgba(10, 18, 30, 0.12);
+}
+
+:root[data-theme='dark'] .steward-banner {
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Lift page content so the fixed bar never hides the footer. */
+body {
+  padding-bottom: 4.25rem;
+}
+
+.steward-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.7rem 0;
+}
+
+.steward-banner img {
+  flex: none;
+  width: 5.5rem;
+  height: auto;
+}
+
+.steward-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.steward-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.steward-statement {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.steward-link {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #18a87f;
+}
+
+:root[data-theme='dark'] .steward-link {
+  color: #4ecda5;
+}
+
+.steward-link span {
+  transition: transform 0.18s ease;
+}
+
+.steward-link:hover {
+  color: #4ecda5;
+}
+
+.steward-link:hover span {
+  transform: translateX(3px);
+}
+
+@media (max-width: 720px) {
+  /* Two tidy rows: the CTA title on top, then the logo and link.
+     The long statement is dropped so the bar stays short. */
+  .steward-banner-inner {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.75rem;
+    padding: 0.6rem 0;
+  }
+
+  .steward-text {
+    order: 1;
+    flex: 1 1 100%;
+  }
+
+  .steward-title {
+    font-size: 0.98rem;
+  }
+
+  .steward-statement {
+    display: none;
+  }
+
+  .steward-banner img {
+    order: 2;
+    width: 5rem;
+  }
+
+  .steward-link {
+    order: 3;
+    margin-left: auto;
+  }
+
+  body {
+    padding-bottom: 5rem;
+  }
+}
