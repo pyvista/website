@@ -137,7 +137,7 @@ export const stewardship = {
   title: 'CoDimensional PBC is PyVista’s commercial steward.',
   statement: 'Founded by PyVista maintainers, building collaborative 3D on top of the project.',
   cta: {
-    href: 'https://codimensional.com',
+    href: 'https://codimensional.com/?utm_source=pyvista&utm_medium=referral&utm_campaign=homepage-banner',
     label: 'Learn more',
   },
 };
